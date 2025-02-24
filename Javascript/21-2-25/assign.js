@@ -109,3 +109,5 @@ function getResult(){
     console.log(`Average Of All students marks is ${sumOfMarks/marks.length}`)
 }
 // getResult();
+
+
