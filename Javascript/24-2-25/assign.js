@@ -4,9 +4,11 @@
 // If the user enters 0 or a negative number, display an error message and continue asking for a valid input.
 // Allow the user to generate multiple tables until they enter -1 to exit the program.
 const prompt = require("prompt-sync")();
-console.log('a')
-console.log(+'a')
-function generateMultiplicationTbale() {
+
+/**
+ * take number from user and generate multipication table for it until user enter -1
+ */
+function generateMultiplicationTable() {
     let num;
   do {
     do {
@@ -16,7 +18,7 @@ function generateMultiplicationTbale() {
       }
     } while (num <= -2 || num === 0);
    
-    if(num== -1){
+    if(num=== -1){
         break;
     }
     for(let i=1;i<11;i++){
@@ -26,7 +28,7 @@ function generateMultiplicationTbale() {
   } while (num!=-1);
 }
 
-// generateMultiplicationTbale();
+// generateMultiplicationTable();
 
 // 2. Vowel and Consonant Counter
 // Instructions:
@@ -36,6 +38,9 @@ function generateMultiplicationTbale() {
 // Count and display the total number of vowels and consonants.
 // Ignore spaces and special characters using continue.
 
+/**
+ * countes number of vowels and consonants from word or sentence
+ */
 function counter(){
     let userIntput = prompt("Enter a word or sentence : ")
     let vowelsCounter = 0 ;
