@@ -369,16 +369,73 @@ function countUnique(arr){
 // Question:
 // Write a function mergeSortedArrays(arr1, arr2) that merges two sorted arrays into a single sorted array 
 // without duplicates.
+function mergeSortedArrays(arr1, arr2){
+  let mergedArr = arr1.concat(arr2);
+  mergedArr = mergedArr.filter((item, index) => mergedArr.indexOf(item) === index);
+  sort(mergedArr);
+  return mergedArr;
+}
+
+function sort(arr){
+  for(let i=0;i<arr.length;i++){
+    for(let j=0;j<arr.length-1;j++){
+      if(arr[j]>arr[j+1]){
+        [arr[j],arr[j+1]]=[arr[j+1],arr[j]]
+      }
+    }
+  }
+}
+let arr1 = [2,4,5,10]
+let arr2 = [1,2,3,3,5,8]
+
+// console.log(mergeSortedArrays(arr1,arr2));
 
 // 4. Find the Most Frequent Element in an Array
 // Question:
 // Write a function mostFrequent(arr) that returns the element that appears most frequently in an array.
 // If multiple elements have the same highest frequency, return any one of them.
+function mostFrequent(arr){
+  let freq = arr.reduce((acc,curr)=>{
+    acc[curr] = acc[curr] || 0 ? acc[curr]+1 : 1;
+    return acc;
+  },{})
+  console.log(freq);
+  
+
+  let result = 0;
+  arr.forEach((ele)=>{
+    if(freq[ele] > result){
+      result = ele;
+    }
+  })
+  return result;
+}
+
+let Num = [2,3,2,3,5,3,5,3,5,5,5];
+// console.log(mostFrequent(Num))
 
 // 5. Implement a Function to Chunk an Array
 // Question:
 // Write a function chunkArray(arr, size) that splits an array into smaller chunks of a given size.
 // Example: chunkArray([1, 2, 3, 4, 5, 6, 7], 3) should return [[1, 2, 3], [4, 5, 6], [7]].
+function chunkArray(arr, size){
+  let len = arr.length;
+  let result = []
+  let chunk = []
+  for(let i=0; i<arr.length;i++){
+    chunk.push(arr[i]);
+    if(chunk.length>size){
+      result.push(chunk)
+      chunk = []
+    }
+    if(len=== len-1){
+      result.push(chunk)
+    }
+  }
+  return result;
+}
+let d = [1, 2, 3, 4, 5, 6, 7];
+console.log(chunkArray(d));
 
 // 6. Rotate an Array by a Given Number of Positions
 // Question:
@@ -405,4 +462,4 @@ function reverseArr(arr,start,end){
 
 let num = [1, 2, 3, 4, 5];
 rotateArray(num,2);
-console.log(num);
+// console.log(num);

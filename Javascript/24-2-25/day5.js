@@ -20,11 +20,14 @@
 
 
 // 3. function scope
-
-function getData(){
+let a;
+a = 29;
+let result = function getData(){
     let data = 'data'
     console.log(data)
 }
+
+console.log(undefined == null);
 
 // console.log(data)
 
@@ -39,7 +42,7 @@ function outer(){
     }
     inner()
 }
-outer()
+// outer()
 
 
 
