@@ -26,8 +26,11 @@ let result = function getData(){
     let data = 'data'
     console.log(data)
 }
+console.log(result());// when function return type is void it returns 'undefined'
 
-console.log(undefined == null);
+
+console.log(undefined == null);// true bcz- both are loosely equal in js
+console.log(undefined === null);// false bcz- data types are different 
 
 // console.log(data)
 

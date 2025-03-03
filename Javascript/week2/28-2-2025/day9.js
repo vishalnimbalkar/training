@@ -43,6 +43,7 @@ let str3 = "my name is vishal, Name"
 
 // slice(start , end)
 // console.log(str3.slice(2))
+// console.log(str3.slice(2,2))
 
 // split(seprator, limit)
 let words = str3.split(" ");
@@ -65,11 +66,43 @@ let lname = 'nimbalkar'
 // it search this string to find pattern and returns first occurrence index if found otherwise -1;
 const regex = /[A-Z]/;
 let age = 'my Age is 24' 
-console.log(age.search(regex));
-
+console.log(age.search(regex));//3
 
 // substring()
+let nm = 'Vishal';
+// console.log(nm.substring(2));//shal
+// console.log(nm.substring(2,5));//sha
+// console.log(nm.substring(5,2));//sha - start is greter than end it is swap automatically 
+// console.log(nm.substring(-5,2));//Vi - negative values are converted into 0
+// console.log(nm.substring(NaN,3));//Vis - NaN is treated as 0
+// console.log(nm.substring(-1,-3));//"" - if both arg are negative or nan or zero it returns "" empty string
+
+
 // match()
+let paragraph = "This is a sentence for match() Method";
+let regx = /[A-Z]/g;
+let result = paragraph.match(regx);
+
+// console.log(result);//[ 'T', 'M' ]
+
 // localeCompare()
+console.log( "a".localeCompare('c'));//-1 or -2 negative 
+console.log( "c".localeCompare('a'));// 1 or 2 positive
+console.log( "a".localeCompare('a'));// 0 equal
+
 // replace()
+let newStr = paragraph.replace(' ','_');
+console.log(newStr);//This_is a sentence for match() Method(bcz we pass string as replacement only first occurrence is replaced)
+let ans = "abc".replace("", "_"); 
+console.log(ans);//_abc
+
+// startsWith(searchString)
+// startsWith(searchString, position)
+
+// endsWith(searchString)
+// endsWith(searchString, endPosition)
+//  -- endPosition - The end position at which searchString is expected to be found (the index of searchString's last character plus 1). Defaults to str.length.
+
+
+
  
