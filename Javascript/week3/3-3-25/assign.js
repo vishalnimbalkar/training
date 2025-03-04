@@ -67,10 +67,10 @@ console.log(sortSentence(sentence));
 
 // Format a string into title case (capitalize first letter of each word)
 
-// let words = sentence.split(' ');
-// let titleCase = words.map((word)=>{
-//     return word.charAt(0).toUpperCase()+word.slice(1);
-// })
+let words = sentence.split(' ');
+let titleCase = words.map((word)=>{
+    return word.charAt(0).toUpperCase()+word.slice(1);
+})
 
-// console.log(titleCase.join(" "));
+console.log(titleCase.join(" "));
 

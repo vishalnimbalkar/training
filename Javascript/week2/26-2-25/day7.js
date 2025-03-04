@@ -1,8 +1,14 @@
 // Array 
 let names = ['vishal', 'rahul', 'sanket']
+let a = [1,2,1]
+// let b = [1,2,1]
+// let c = [...a,...b]
+// console.log(c);
+// concat array using spread operator (...)
 // console.log(names)
 // console.log("Length : "+names.length)
-
+//  console.log(a.toString());
+ 
 // push()
 // console.log(names.push('sai','d'));
 

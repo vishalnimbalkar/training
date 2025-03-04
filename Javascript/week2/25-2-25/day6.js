@@ -29,3 +29,43 @@ let output = outer(10);
 output(12)
 let output2 = outer(20);
 output2(22)
+
+function outer(){
+    let a = 10;
+    function inner(){
+        console.log(a)
+        a++;
+    }
+    return inner;
+}
+
+let ans1 = outer()
+let ans2 = outer()
+// console.log(ans1)
+
+// ans1()
+// ans1()
+// console.log();
+// ans2()
+// ans2()
+
+function createCounter(){
+    let count =0;
+    return {
+        increment : function(){
+            count++;
+            console.log(count);
+            
+        },
+        decrement : function(){
+            count--;
+            console.log(count);
+            
+        }
+    }
+}
+
+let counter = createCounter()
+// counter.increment();
+// counter.increment();
+// counter.decrement();
