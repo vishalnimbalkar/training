@@ -14,6 +14,28 @@ let numbers = [1,2,3,4,2,4];
 
 // console.log(ans);
 
+// thisArg parameter in map 
+let multiplier = {
+    factor : 2,
+    multipy(arr){
+      return arr.map(function(num){
+        return num*this.factor;
+      },this)
+    }
+}
+
+// Arrow functions inherit this from their surrounding scope, so they don’t need thisArg.
+// const multiplier = {
+//     factor: 2,
+//     multiply(arr) {
+//       return arr.map(num => num * this.factor); 
+//     }
+//   };
+
+  
+// console.log(multiplier.multipy([1,2,4]));
+
+
 //  filter()
 // let even = numbers.filter((ele)=>{
 //     return ele%2==1
@@ -63,10 +85,21 @@ let numbers = [1,2,3,4,2,4];
 // console.log([1, 2, undefined, 4].reduce((a, b) => a + b)); // NaN
 
 
+// console.log(nums.reduce((acc,num)=>{
+//     console.log(acc);
+    
+//     return acc+num;
+// }))
 // find() - return first ele that satisfis condition else undefined
-let nums = [1,2,3,4,2,4];
+let nums = [1,2,3,4,2,4, ,5];
 let result = nums.find((ele)=>ele>3);
 // console.log(result);
+// console.log(nums.join('+'));
+let revered = nums.reverse()
+console.log(revered);
+console.log(nums);
+console.log(revered === nums);
+
 
 // findIndex() - return first index of element that satisfis condition else -1
 // findLast() - iterate array in reverse and return first ele that satisfis condition else undefined
@@ -115,6 +148,6 @@ let arrr = [1,2,,3,4]
 //  array.splice(2);// delete all from start [1,2]
 //  array.splice(2,1);// delete one from start [1,2,4,5]
 let res = array.splice(2,0,0,0); // [1,2,0,0,3,4,5]
- console.log(array);
- console.log(res);
+//  console.log(array);
+//  console.log(res);
  

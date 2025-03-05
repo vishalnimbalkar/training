@@ -16,9 +16,9 @@ let a = [1,2,1]
 // names.push(...moreNames,3);
 // let newArr = names.concat(moreNames);
 // console.log(newArr);
-// names.push([3,2,3]);
+names.push([3,2,3]);
 // console.log(names.length)
-// console.log(names[3][2])
+console.log(names)
 
 // function myPush(arr,...ele){
 //     let len = arr.length;

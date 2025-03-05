@@ -14,7 +14,7 @@ let msg = `we can use \`, \$, and \{\} using backslash \\`
 // adding expression 
 let num1 = 10;
 let num2 = 29;
-console.log(`${num1} + ${num2} = ${num1+num2}`);
+// console.log(`${num1} + ${num2} = ${num1+num2}`);
 
 // string comparision
 // 1. strict equal(===) and loose equal(==)
@@ -28,13 +28,13 @@ let str4 = new String("hello");
 // console.log(typeof str2);
 // console.log(typeof str3);
 
-// console.log(str1 == str3); //false
+// console.log(str1 == str3); //true
 // console.log(str1 === str3); //false
 
 // console.log(str4 == str3); //false
 
-// // 2.localCompare()
-// console.log("apple".localeCompare("appla")); // -1 - first string come before second
+// 2.localCompare()
+// console.log("apple".localeCompare("banana")); // -1 - first string come before second
 // console.log("banana".localeCompare("apple")); // 1 - first string come after a second
 // console.log("apple".localeCompare("apple")); // 0 - both are equal
 
@@ -46,7 +46,7 @@ let str4 = new String("hello");
 // 1. + operator
 
 // if operand is string it will converted into string 
-console.log([]+""); // [] array is converted into empty string "" due to type coercion
+// console.log([]+""); // [] array is converted into empty string "" due to type coercion
 // console.log("" == false) // "" is always false
 // [] is always true 
 // "" is always false
@@ -54,16 +54,16 @@ console.log([]+""); // [] array is converted into empty string "" due to type co
 
 // console.log("hii"+true);//hiitrue
 let res =[]+{};
-console.log(typeof  res);
+// console.log(typeof  res);
 
-console.log([]+{});"[object object]"
-console.log([]+[]);
-console.log({}+{});
+// console.log([]+{});"[object object]"
+// console.log([]+[]);
+// console.log({}+{});
 
 // 2. concat(str1,str2...,strN)
 // it concatenate multiple strings and return new string 
 let myName = 'vishal ';
-console.log(myName.concat("Laxman ",lastName))
+// console.log(myName.concat("Laxman ",lastName))
 // 3. template litrals
 // no need for + operator 
 
@@ -77,13 +77,13 @@ for (let i = 0; i < 5; i++) {
 // 5. join() with arrays
 let words = ["JavaScript", "is", "programmin", "language"];
 let sentence = words.join(" ");
-console.log(sentence); 
+// console.log(sentence); 
 let name = [firstName, lastName];
-console.log(name.join(" "));
+// console.log(name.join(" "));
 
 // isNaN("fjf")
 // Number.isNaN()
 
-console.log(Number('hello'));
-console.log(Number.isNaN(NaN));
+// console.log(Number('hello'));
+// console.log(Number.isNaN(NaN));
 

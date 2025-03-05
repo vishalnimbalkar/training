@@ -9,6 +9,9 @@ myName[3]='x';// we cannot update string by this way
 let name = new String('vishal')
 // console.log(myName == name);
 
+// let a = [1,2,3]
+// let b = [...a];
+// console.log(`spreed operator ${a===b}`);
 
 // 'a' and 'A' are different bcz it streets it case vise (upper and lower are different)
 // if('a' == 'A') console.log(true);
@@ -66,7 +69,7 @@ let lname = 'nimbalkar'
 // it search this string to find pattern and returns first occurrence index if found otherwise -1;
 const regex = /[A-Z]/;
 let age = 'my Age is 24' 
-console.log(age.search(regex));//3
+// console.log(age.search(regex));//3
 
 // substring()
 let nm = 'Vishal';
@@ -86,15 +89,15 @@ let result = paragraph.match(regx);
 // console.log(result);//[ 'T', 'M' ]
 
 // localeCompare()
-console.log( "a".localeCompare('c'));//-1 or -2 negative 
-console.log( "c".localeCompare('a'));// 1 or 2 positive
-console.log( "a".localeCompare('a'));// 0 equal
+// console.log( "a".localeCompare('c'));//-1 or -2 negative 
+// console.log( "c".localeCompare('a'));// 1 or 2 positive
+// console.log( "a".localeCompare('a'));// 0 equal
 
 // replace()
 let newStr = paragraph.replace(' ','_');
-console.log(newStr);//This_is a sentence for match() Method(bcz we pass string as replacement only first occurrence is replaced)
+// console.log(newStr);//This_is a sentence for match() Method(bcz we pass string as replacement only first occurrence is replaced)
 let ans = "abc".replace("", "_"); 
-console.log(ans);//_abc
+// console.log(ans);//_abc
 
 // startsWith(searchString)
 // startsWith(searchString, position)

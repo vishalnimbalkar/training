@@ -35,11 +35,12 @@ function concatenateStrings(str1, str2) {
 // 4.Check if one string contains another using includes()
 // Write a function containsSubstring(str, subStr) that returns true if str contains subStr.
 function containsSubstring(str, subStr) {
+  let isSubString = false;
   if (str.length < subStr.length) return false;
   if (str.includes(subStr)) {
-    return true;
+    isSubString = true;
   }
-  return false;
+  return isSubString;//use once false instead of multiple times
 }
 // console.log(containsSubstring("Hello, world",'world'));
 // console.log(containsSubstring("Hello, world",'Hello, world'));
@@ -72,13 +73,15 @@ function compareIgnoreCase(str1, str2) {
 // 7.Check if two strings are anagrams (basic version)
 // Write a function isAnagram(str1, str2) that returns true if str1 and str2 are anagrams (contain the same letters in any order).
 function isAnagram(str1, str2) {
+  let isAnagram = false;
   if (str1.length !== str2.length) return false;
-  for (let i = 0; i < str1.length; i++) {
+  for (let i = 0; i < str2.length; i++) {
     if (!str1.includes(str2[i])) {
-      return false;
+      isAnagram = false;
+      break;
     }
   }
-  return true;
+  return isAnagram
   // return str1.split('').sort().join('')===str2.split('').sort().join('');
 }
 // console.log(isAnagram('vishal','visale'));
@@ -93,7 +96,7 @@ function findWordsOfLength(sentence, length) {
   });
   return result;
 }
-// console.log(findWordsOfLength("Hello everyone today is a holiday",5))
+console.log(findWordsOfLength("Hello everyone today is a holiday",5))
 
 // 9.Find the longest word and its length in a sentence
 // Write a function longestWordInfo(sentence) that returns an object { word: "longestWord", length: wordLength }.
@@ -132,6 +135,7 @@ function charFrequency(str) {
   }, {});
 }
 // console.log(charFrequency("apple"));
+//solve using without  any inbuilt methods
 
 // 12.Find and replace the longest word in a sentence with another word
 // Write a function replaceLongestWord(sentence, newWord) that replaces the longest word in sentence with newWord.

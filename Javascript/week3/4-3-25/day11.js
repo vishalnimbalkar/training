@@ -32,7 +32,7 @@ employee.salary=12000;
 
 // 2. using []
 // console.log(user['email'])
-// console.log(user['isLoggedIn'])
+// console.log(user['isLoggedInw'])
 
 // modifying properties
 // adding new property 
@@ -43,34 +43,19 @@ user[secreatKey] = "vishal123";
 // user.secreatKey = "vishal123";
 // console.log(user);
 // console.log(user[secreatKey]);
-
+let address = {
+    city : 'pune',
+    state : 'Maharashtra'
+}
+user.address = address;
+// console.log(user)
 // update id 
 user.id = 111;
 user['name'] ='Vishal Nimbalkar';
 
 // delete property 
 // it delete property from object and return true 
-console.log(delete user.id)
-console.log(delete user.ss)
+// console.log(delete user.id)
+// console.log(delete user.ss)
 // delete user - we cannot delete object using delete
-console.log(user);
-
-// hasOwnProperty
-
-// for in loop
-for(let key in user){
-    console.log(user[key]);
-}
-// - for in loop iterates objects by keys 
-// - we can't use dot notation to access properties instead use [] ex.,user[key]
-// -Note: for...in loops over the keys of an object, not the values.
-// Dot notation expects a literal property name, not a variable.
-// user.key tries to access a property named "key", but the object does not have 'key', so it returns undefined.
-// -Bracket notation allows dynamic property access because key holds different values during each loop iteration.
-
-
-// Object.assign()
-
-// Object.keys() 
-
-// Object.values()
+// console.log(user);
