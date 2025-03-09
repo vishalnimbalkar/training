@@ -262,3 +262,78 @@
 // console.log(a == b);//false
 // console.log(1 < 2 < 3);//true < 3 - 1 < 3 - true 
 // console.log(3 > 2 > 1);//true >= 1 - false
+
+
+// console.log(0 || "Hello"); // "Hello"
+// console.log(0 || ""); // ""
+// console.log("hello" && "World");// ;'hello'
+// console.log(null ?? "Fallback");//"Fallback"
+// console.log(false ?? "Fallback");// false
+// console.log(true ?? "Fallback");// true
+// console.log(undefined ?? "Fallback");// "Fallback"
+// console.log( "Fallback" ?? undefined);// "Fallback"
+// console.log( "Fallback" ?? null);// "Fallback"
+// console.log( true ?? false);// true
+
+// console.log([] == 0);//true
+// console.log([] == false);// ture
+// // console.log([] === false);// false
+// console.log(null == undefined);// true
+// console.log(null === undefined);// false
+// console.log("5" + 2);// "52"
+// console.log("5" - 2);//3
+
+// console.log(+"10");//10
+// console.log(+true);//1
+// console.log(+false);//0
+// console.log(+undefined);//NaN
+// console.log(+null);//0
+// console.log(+[]);//0
+// console.log(+{});//NaN
+
+// const obj = { a: 1, b: 2 };
+// console.log(obj.hasOwnProperty("toString"));//false
+// console.log("toString" in obj);//true
+// console.log(Object.prototype.hasOwnProperty.call(obj, "toString"));//false
+
+// console.log(5 & 1);
+// console.log(5 | 1);
+// console.log(5 ^ 1);
+// console.log(~5);//-6
+// console.log(~-6);//5
+// console.log(~~5.7);//5
+// console.log(~~-5.7);-5
+
+// let a = 10;
+// console.log(a++ + ++a);// 10+12=22 , a=12
+// console.log(a + a++);// 12 + 12 =24  a=13
+// console.log(++a + a++);// a=14, 14+14=28, a=15
+// console.log(a);//15
+
+// console.log(typeof null);
+// console.log(typeof NaN);
+// console.log(typeof []);
+// console.log(typeof {});
+// console.log(typeof function () {});
+
+// let x;
+// x ||= 10;  
+// console.log(x);//10
+
+// let y = 0;
+// y &&= 5;  
+// console.log(y);//0
+
+// let z;
+// z ??= 20;
+// console.log(z);//20
+
+// console.log([] + []);//""
+// console.log([] + {});//"[o o]"
+// console.log({} + []);//"[o o]"
+// console.log({} + {});//"[o o][o o]"
+// console.log(1 + "1" - 1);//10
+// console.log("5" * "2");//10
+// console.log("5" / "2");//2.5
+// console.log("5" - "2");//3
+// console.log("5" + "2");//52
