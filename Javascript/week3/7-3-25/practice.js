@@ -91,6 +91,7 @@ Object.values(person.work).forEach((ele)=>{
     // console.log(ele);  
 })
 
+
 // tricky questions
 
 // const obj = { a: 1, b: 2, c: 3 };
@@ -122,10 +123,83 @@ Object.values(person.work).forEach((ele)=>{
 
 // Object Methods
 // Object.entries()
-// groupBy()
-// hasOwn()
-// toLocalString()
-// toString()
-// valueOf()
 
-// JSON Syntax, Parsing, Stringifying
+// console.log(Object.entries(person));
+
+
+Object.entries(person).forEach(([key,value])=>{
+  // console.log(key, value);
+  
+})
+
+for(let [key, value] of Object.entries(person)){
+  // console.log(key,value);
+  
+}
+let a = [1,2,3]
+// console.log(Object.entries(a));
+// console.log(Object.entries("djflks"));
+
+
+// hasOwn()
+// const obj = {
+//   name: "Alice",
+//   age: 25,
+//   hasOwnProperty: () => false
+// };
+
+// console.log(obj.hasOwnProperty("name"));//false
+// console.log(Object.prototype.hasOwnProperty.call(obj, "name"));//true
+// console.log(Object.hasOwn(obj, "name"));//true
+
+// const obj = Object.create({ inherited: "value" });
+// obj.own = "value";
+
+// console.log(Object.hasOwn(obj, "own"));//true
+// console.log(Object.hasOwn(obj, "inherited"));//false
+// console.log(obj.hasOwnProperty("own"));//true
+// console.log(obj.hasOwnProperty("inherited"));//false
+
+const obj = Object.create(person);
+obj.key = "value";
+
+// console.log(obj.hasOwnProperty("key"));
+// console.log(Object.prototype.hasOwnProperty.call(obj, "key"));
+// console.log(Object.hasOwn(obj, "key"));
+
+// console.log(null==0);//false
+// console.log('' && 0 && "hell");
+
+// let arr = [1,2,3,4];
+// delete arr[2];
+// console.log(arr[2]);
+
+// // console.log(arr.splice(null,undefined));
+// let str = "vishal"
+// console.log(str.concat(4,5));
+// console.log(str.slice(-10,3));
+
+
+// arr[-202]=233;
+// console.log(Object.values(arr));
+// console.log(arr.join("+"));
+
+// console.log(arr.length);
+
+// toLocalString()
+// - returns string representation of given object 
+
+const testDate = new Date();
+
+// const indDate = testDate.toLocaleString("ind");
+// console.log(indDate);
+
+let num = 1000000;
+console.log(num.toLocaleString('en-IN'));
+
+// toString()
+// -converts given object into string 
+
+// valueOf()
+// -convets object into primitive value  
+
