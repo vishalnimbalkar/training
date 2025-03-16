@@ -94,6 +94,7 @@
 // console.log(Math.floor(Infinity));//Infinity
 // console.log(Math.floor(9.9));//9
 // console.log(Math.floor(9.1));//9
+// console.log(Math.floor("9.1"));//9
 
 // 4. Math.max();
 // -it returns max value from given numbers 
@@ -135,5 +136,15 @@
 
 // Date & its methods 
 // it is used to work with date and time 
-const currentDate = new Date.UTC();
-console.log(currentDate)
+const currentDate = new Date();
+console.log(currentDate.toString())
+console.log(currentDate.toDateString())
+console.log(currentDate.toLocaleString())
+console.log(currentDate.toLocaleDateString())
+let start = Date.now();
+console.log(Date.now());// current date in miliseconds
+console.log(currentDate);// current date
+console.log(currentDate.getDate());//
+console.log(currentDate.setDate(15));//
+console.log(currentDate.toDateString())
+

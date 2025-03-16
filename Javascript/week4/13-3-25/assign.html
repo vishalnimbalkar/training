@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        background-color: aqua;
+      }
+      .hideBox {
+        display: none;
+      }
+      img {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Problem 1</h3>
+    <p id="text">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam iusto,
+      suscipit quisquam minima nobis harum dolorum dolor in? Laborum repellendus
+      itaque eveniet eius, debitis suscipit autem fugit quisquam delectus
+      repudiandae.
+    </p>
+
+    <h3>Problem 2</h3>
+    <button id="myButton">Click Here</button>
+
+    <h3>Problem 3</h3>
+    <div id="box">
+      <p>This is a div box</p>
+    </div>
+    <button id="hide" value="hide">Hide</button>
+
+    <h3>Problem 4</h3>
+    <img src="./signature2.jpeg" alt="" />
+    <button id="change">Change Image</button>
+
+    <h3>Problem 5</h3>
+    <ul class="ulList">
+      <li class="list">first</li>
+      <li class="list">second</li>
+      <li class="list">third</li>
+    </ul>
+    <button id="addLi">Add List</button>
+    <script>
+      // 1.Select a <p> tag with id="text" and change its text to "Hello, World!".
+      const pSelector = document.querySelector("#text");
+      // pSelector.innerText = "Hello, World!"
+
+      // 2.Select a button with id="myButton" and change its background color to blue.
+      const btn = document.querySelector("#myButton");
+      // btn.style.backgroundColor = 'blue'
+
+      // 3.Hide a <div> with id="box" when a button is clicked.
+      let myDiv = document.querySelector("#box");
+      let myBtn = document.querySelector("#hide");
+      myBtn.addEventListener("click", function () {
+        console.log(myBtn.value);
+        if (myBtn.value === "hide") {
+          myBtn.value = "show";
+          myBtn.innerHTML = "show";
+          myDiv.classList.add("hideBox");
+        } else {
+          myBtn.value = "hide";
+          myBtn.innerHTML = "hide";
+          myDiv.classList.remove("hideBox");
+        }
+      });
+
+      // 4.Change the image source when a button is clicked.
+      let myImg = document.querySelector("img");
+      let imgButton = document.querySelector("#change");
+      imgButton.addEventListener("click", () => {
+        myImg.src = "./Signature.jpg";
+      });
+
+      // 5.When a button is clicked, add a new <li> item with text "New Item" to the list.
+      let myUl = document.querySelector(".ulList");
+
+      let myAddBtn = document.querySelector("#addLi");
+      myAddBtn.addEventListener("click", () => {
+        let newEle = document.createElement("li");
+        newEle.innerText = "New Item";
+        newEle.classList.add("list");
+        myUl.appendChild(newEle);
+      });
+
+      // 6.Toggle between light and dark color's when clicking a button.
+      // 7.When a user types in an input field, display the entered text in a <p> tag.
+      // 8.Create a counter that increments and decrements when respective buttons are clicked.
+      // 9.Create a modal popup that appears when a button is clicked and disappears when the close button is clicked.
+      // 10.Click on any list item to remove it from the list.
+      myUl.addEventListener("click", (event) => {
+        event.target.remove(); 
+      });
+    </script>
+  </body>
+</html>
+<!-- json
+date
+dom 
+practice questions optimized 
+dom assignment -->

@@ -1,0 +1,96 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+        .myClass{
+            background-color: red;
+            color: black;
+        }
+    </style>
+    <body>
+        <ul>
+            <li id="first">vishal</li>
+            <li class="second">rahul</li>
+            <li>sanket</li>
+            <li>ganesh</li>
+        </ul>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam neque molestias id cupiditate obcaecati nulla perspiciatis sunt nemo eos laborum dicta amet mollitia dolores ab, quisquam sed ad laboriosam porro!
+        </p>
+    <script>
+            // const myli = document.getElementById('first');
+            // const myClass = document.getElementsByClassName('second');
+            // const myTag = document.getElementsByTagName('li'); 
+            const myNode = document.querySelectorAll("li")
+
+            // console.log(myli);
+            // console.log(myClass);
+            // console.log(myTag);
+            
+            // innerText()
+            // - returns or sets visible text 
+            // - ignores hiddern content (disply : none;)        
+            // myNode.forEach((element)=>{
+            //     let ele = element.innerText;
+            //     console.log(ele);
+            //     element.innerText = 'orange'
+            // })
+
+            // innerHTML()
+            // -returns or sets the html content of element 
+            // - it also returns html tags
+            // myNode.forEach((element)=>{
+            //     let ele = element.innerText;
+            //     element.innerHTML=`<h2>${ele}</h2>`
+            // })
+
+            // textContent()
+            // - returns or sets a text content of an element , including hidden text 
+            // - does not parse html tags , treats everything as plain text 
+
+            // const para = document.querySelector('p');
+            // para.textContent='<h3>hello world</h3>'
+
+            // add id to an element in dom 
+            // using setAttribute()
+            // syntax - Object.setAttribute(attributename,value)
+            // const ptag = document.querySelector('p');
+            // ptag.setAttribute('id', 'myid')
+
+            // second way - using direct assignment to id 
+            // ptag.id='myid'
+        
+            // addf class to an element in dom 
+            // using clasList property
+            const ulList = document.querySelector('ul');
+            // ulList.classList.add('myClass')
+
+            // using className property 
+            // ulList.className +=' myClass'
+
+            // how to create new element 
+            // using createElement 
+            let newElement = document.createElement('div')
+            newElement.innerText='new element added success'
+            ulList.appendChild(newElement);
+            // -append it as last child 
+            // -appendChild returns appended element 
+
+            let newList = document.createElement('li')
+            let newList2 = document.createElement('li')
+            newList.innerText='sohel'
+            newList2.innerText='sagar'
+            ulList.append(newList2,newList);
+            // -append it as last child 
+            // - we can add one or more elements
+            // - No return value (undefined)
+
+            // using innerHTML - it removes all other elements and add this element use += to add and do not remove
+            // ulList.innerHTML += "<li> new list </li>"
+            ulList.remove()
+        </script>
+    </body>
+    </html>
