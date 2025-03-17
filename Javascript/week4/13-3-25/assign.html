@@ -15,6 +15,21 @@
         width: 200px;
         height: 200px;
       }
+      .toggleBox {
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        border: 2px solid black;
+      }
+      .counter{
+        display: flex;
+        flex-direction: row;
+      }
+      .popUp{
+        width: 400px;
+        height: 400px;
+        border: 2px solid black;
+      }
     </style>
   </head>
   <body>
@@ -46,14 +61,37 @@
       <li class="list">third</li>
     </ul>
     <button id="addLi">Add List</button>
+
+    <h3>Problem 6</h3>
+    <div class="toggleBox">toggle color</div>
+    <button class="toggle">Toggle</button>
+
+    <h3>Problem 7</h3>
+    <input type="text" placeholder="Enter Your name " id="name">
+    <p id="result"></p>
+    
+    <h3>Problem 8</h3>
+    <div class="counter">
+      <button id="decrement">-</button>
+      <h3 id="count">0</h3>
+      <button id="increment">+</button>
+    </div>
+    
+    <h3>Problem 9</h3>
+<div class="popUp hideBox">
+  <button id="close">Close PopUp</button>
+
+</div>
+<button id="show">Show PopUp</button>
+
     <script>
       // 1.Select a <p> tag with id="text" and change its text to "Hello, World!".
       const pSelector = document.querySelector("#text");
-      // pSelector.innerText = "Hello, World!"
+      pSelector.innerText = "Hello, World!"
 
       // 2.Select a button with id="myButton" and change its background color to blue.
       const btn = document.querySelector("#myButton");
-      // btn.style.backgroundColor = 'blue'
+      btn.style.backgroundColor = 'blue'
 
       // 3.Hide a <div> with id="box" when a button is clicked.
       let myDiv = document.querySelector("#box");
@@ -90,12 +128,54 @@
       });
 
       // 6.Toggle between light and dark color's when clicking a button.
+      let myBox = document.querySelector(".toggleBox");
+      let toggleBtn = document.querySelector(".toggle");
+
+      toggleBtn.addEventListener("click", () => {
+        if (myBox.style.backgroundColor === "black") {
+          myBox.style.backgroundColor = "white";
+        } else {
+          myBox.style.backgroundColor = "black";
+        }
+      });
+
+
       // 7.When a user types in an input field, display the entered text in a <p> tag.
+        let name = document.querySelector('#name');
+        let result = document.querySelector('#result');
+        name.addEventListener('input',(event)=>{
+          result.innerText=event.target.value;
+        })
+
       // 8.Create a counter that increments and decrements when respective buttons are clicked.
+      let increment = document.querySelector('#increment');
+      let decrement = document.querySelector('#decrement');
+      let count = document.querySelector('#count');
+      increment.addEventListener('click',()=>{
+        count.innerText=Number(count.innerText)+1;
+      })
+      decrement.addEventListener('click',()=>{
+        if(!Number(count.innerText)==0){
+          count.innerText=Number(count.innerText)-1;
+        }
+      })
+
+      // use textContent for above ex
       // 9.Create a modal popup that appears when a button is clicked and disappears when the close button is clicked.
+      let popUp = document.querySelector('.popUp');
+      let show = document.querySelector('#show');
+      let close = document.querySelector('#close');
+      show.addEventListener('click',()=>{
+        popUp.classList.remove('hideBox')
+      })
+      close.addEventListener('click',()=>{
+        popUp.classList.add('hideBox')
+
+      })
+
       // 10.Click on any list item to remove it from the list.
       myUl.addEventListener("click", (event) => {
-        event.target.remove(); 
+        event.target.remove();
       });
     </script>
   </body>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <button id="clickMe">Click Me</button>
+    </div>
+    <button id="send">Send</button>
+
+    <ul id="myList">
+      <li class="list">Apple</li>
+      <li class="list">Mango</li>
+      <li class="list">Banana</li>
+      <li class="list">Orange</li>
+    </ul>
+    <!-- <button id="btn" onclick="console.log('Inline Handler')">Click Me!</button> -->
+
+    <script>
+      // Event bubbling
+      // event triggred on child element bubbles up to a parent element and continue to the top of dom tree
+      let bubbleDiv = document.querySelector(".container");
+      let clickMe = document.querySelector("#clickMe");
+      // clickMe.onclick=
+      bubbleDiv.addEventListener("click", () => {
+        console.log("div");
+      });
+      clickMe.addEventListener("click", (event) => {
+        console.log("button");
+        // event.stopPropagation();
+        // -stop event to bubbling up to dom
+        // -do not stop other event listeners on the same element
+
+        // event.stopImmediatePropagation();
+        // -stop event to bubbling up to dom
+        // - stop other event listeners on the same element
+      });
+
+      clickMe.addEventListener("click", (event) => {
+        console.log("other button on same level");
+      });
+
+      // Event Delegation
+      // instead of handling events for each child we apply event listener on parent and determine which event is targeted using 'event.target'
+      let myUl = document.getElementById('myList');
+      myUl.addEventListener('click',function (event){
+        console.log(event.target.innerText);
+        event.stopPropagation()
+      })
+
+      // problem no 10 in assignment
+
+      //Event handling
+      //we can handle events in three ways
+      // 1. Inline html event handling
+      // <button onclick="clickMe()">click</button>
+      // function clickMe()
+      // {
+      //     console.log('button clicked');
+      // }
+
+      // 2. Event handling using Event properties
+      const btn2 = document.getElementById("send");
+      btn2.onclick = () => {
+        console.log("button clicked");
+      };
+
+      btn2.onmouseover = () => {
+        // console.log("mouse over");
+      };
+
+      // 3. using .addEventListener()
+    </script>
+<div id="outer">
+  <div id="inner">
+      <button id="btn">Click Me!</button>
+  </div>
+</div>
+
+<script>
+  const outer = document.getElementById('outer');
+  const inner = document.getElementById('inner');
+  const btn3 = document.getElementById('btn');
+
+  outer.addEventListener('click', function (event) {
+      console.log('Outer Div (Capture)');
+    });
+    
+    inner.addEventListener('click', function () {
+      console.log('Inner Div (Capture)');
+      event.stopPropagation();
+  });
+
+  btn3.addEventListener('click', function () {
+      console.log('Button Clicked');
+  });
+</script>
+
+  </body>
+</html>
