@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #container {
+      height: 200px;
+      width: 200px;
+      border: 2px solid black;
+      background-color: white;
+    }
+    .hide {
+      display: none;
+    }
+    #box{
+        height: 200px;
+      width: 200px;
+      border: 2px solid black;
+    }
+  </style>
+  <body>
+    <h3>Problem 1</h3>
+    <p id="message">Good Morning</p>
+    <button id="myBtn">Change Text</button>
+
+    <h3>Problem 2</h3>
+    <div id="container">
+      <button id="divBtn">Change Color</button>
+    </div>
+
+    <h3>Problem 3</h3>
+    <p id="myP">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo,
+      fugiat delectus? Ad minima, a animi, nemo quisquam earum culpa nihil eaque
+      omnis, non mollitia ipsum aliquid architecto quia ea quam.
+    </p>
+    <button id="hideShow" value="show">hide/show</button>
+
+    <h3>Problem 4</h3>
+    <input type="text" id="userInput" >
+    <button id="logInput">Log Input</button>
+    <p id="result"></p>
+
+    <h3>Problem 5</h3>
+    <ul id="myUl">
+        <li >Apple</li>
+        <li >Orange</li>
+        <li >Banana</li>
+    </ul>
+    <button id="ulBtn">change</button>
+
+    <h3>problem 6</h3>
+    <div id="box">
+
+    </div>
+
+    <h3>Problem 7</h3>
+    <form id="myForm">
+        <input type="text" id="name" >
+        <br>
+        <input type="text" id="pass" >
+        <input type="submit" value="submit">
+    </form>
+
+    <h3>Problem 8</h3>
+    <div id="bubble">
+        <button id="inside">Click Me</button>
+    </div>
+
+    <h3>Problem 9</h3>
+    <ul id="myUl2">
+        <li class="list">Apple</li>
+        <li class="list">Orange</li>
+        <li class="list">Banana</li>
+    </ul>
+    <button id="ulBtn2">Add</button>
+
+    <h3>Problem 10</h3>
+    <div id="btn-group">
+        <button id="add" value="add">add</button>
+        <button id="update" value="update">update</button>
+        <button id="delete" value="delete">delete</button>
+    </div>
+    <script>
+      //1.Write a function that changes the text of a <p> element with id="message" to "Hello, World!" when a button is clicked.
+      function changeText() {
+        const pTag = document.getElementById("message");
+        const myBtn = document
+          .getElementById("myBtn")
+          .addEventListener("click", function () {
+            pTag.textContent = "Hello, World!";
+          });
+      }
+      changeText();
+
+      // 2.Create a button that changes the background color of a <div> when clicked.
+      const myDiv = document.getElementById("container");
+      const myBtn = document
+        .getElementById("divBtn")
+        .addEventListener("click", () => {
+          myDiv.style.backgroundColor = "blue";
+        });
+
+      // 3.Create a button that hides/shows a paragraph when clicked.
+      const para = document.getElementById("myP");
+      const btn = document.getElementById("hideShow");
+      btn.addEventListener("click", (event) => {
+        if (event.target.value === "show") {
+          para.classList.add("hide");
+          event.target.value = "hide";
+        } else {
+          para.classList.remove("hide");
+          event.target.value = "show";
+        }
+      });
+
+      // 4.Create an input field and a button that logs the input value when clicked. 
+      const userInput = document.getElementById('userInput')
+      const result = document.getElementById('result')
+      const logInput = document.getElementById('logInput').addEventListener('click',()=>{
+        result.innerText=userInput.value;
+      })
+
+      // 5.Change the text of all <li> elements inside a <ul> to "Updated Item" when a button is clicked.
+        const myUl = document.querySelectorAll('#myUl li');
+        const ulBtn = document.getElementById('ulBtn').addEventListener('click',()=>{
+            console.log(myUl);
+            
+            myUl.forEach((node)=>{
+                node.innerText='Updated Item'
+                
+            })        
+        })
+      // 6.Change the background color of a <div> to red when the mouse enters and reset it when the mouse leaves.
+        const box = document.getElementById('box');
+        box.addEventListener('mouseover',()=>{
+            box.style.backgroundColor = 'red'
+        })
+
+        box.addEventListener('mouseout',()=>{
+            box.style.backgroundColor = 'unset'
+        })
+        //mouseenter and mouseleaves
+      // 7.Prevent a form from submitting and log the input value instead.
+      const name = document.getElementById('name')
+      const pass = document.getElementById('pass')
+      const myForm = document.getElementById('myForm').addEventListener('submit',function(event){
+        event.preventDefault();//read more 
+        console.log(name.value);
+        console.log(pass.value);
+      })
+
+      // 8.Demonstrate event bubbling by clicking a <button> inside a <div> and observing both handlers triggering.
+        const bubbleDiv = document.getElementById('bubble').addEventListener('click',function(){
+            console.log("div clicked");
+        })
+        const insideBtn = document.getElementById('inside').addEventListener('click',function(){
+            console.log("Button clicked");
+        })
+      // 9.Create a button that adds a new <li> to a list. Clicking any <li> should log its text.
+        const myUl2 = document.getElementById('myUl2')
+        myUl2.addEventListener('click',function(event){
+            console.log(event.target.innerText);
+        });
+        const ulBtn2 = document.getElementById('ulBtn2').addEventListener('click',()=>{
+            let newLi = document.createElement("li")
+            newLi.innerText = "new List"
+            newLi.classList.add('list')
+            myUl2.appendChild(newLi);
+        })
+      // 10.Instead of adding event listeners to individual buttons, use event delegation on the parent.
+      const Btns = document.getElementById('btn-group');
+      Btns.addEventListener('click',(event)=>{
+        console.log(event.target.value);
+        console.log(event.target.tagName);
+        
+      })
+      // 11.Create a draggable <div> that can be moved within another <div>
+        
+    </script>
+  </body>
+</html>
