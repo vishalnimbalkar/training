@@ -71,12 +71,51 @@ function task2(callback) {
     },1000);
 }
 
+// task1(()=>{
+//     task2(()=>{
+//         console.log("tasks completed")
+//     })
+// })
 // task1(function () {
 //     task2(function () {
 //         console.log("Both tasks completed");
 //     });
 // });
 
+// using promise 
+function get(data){
+    return new Promise((resolve, reject)=>{
+        setTimeout(() => {
+            // reject("Error")
+            resolve(data);
+        }, 2000);
+    })
+}
+
+// get('data 1').then((res)=>{
+//     console.log(res);
+//     return get('data 2')
+// }).then((res)=>{
+//     console.log(res);
+//     return get('data 3')
+// }).then((res)=>{
+//     console.log(res);
+// }).catch((error)=>{
+//     console.log(error);
+// })
+
+
+// using async await 
+async function callAll(){
+    const data1 = await get('data 1');
+    console.log(data1);
+    const data2 = await get('data 2');
+    console.log(data2);
+    const data3 = await get('data 3');
+    console.log(data3);
+    
+}
+callAll()
 // solution for callback hell 
 // Promise and Async/await 
 // -----------------------------------------------------------------------
@@ -95,12 +134,16 @@ let checkEven = (number)=>{
     })
 }
 
-// checkEven(11).then((result)=>console.log(result))
+// checkEven(10).then((result)=>{
+//     console.log(result);
+//     // show();
+// })
 // .catch((error)=>console.log(error))
 // .finally(()=>console.log("clean up done"))
 
-// resolve(value) - makes promise as fullfilled and returns result 
-// reject(error) - makes the promise rejected with an error 
+
+// resolve(value) - makes promise as fullfilled and returns result and executer then() method
+// reject(error) - makes the promise rejected with an error and execute catch() method
 
 // methods
 // Promise.resolve()- returns a promise that resolves with the given value 
@@ -147,9 +190,95 @@ function getData(data){
 // -API Calls 
 // -Database Queries
 
-// try-catch vs then-catch 
-// dummy data api 
-fetch('https://jsonplaceholder.typicode.com/posts/100')
-      .then(response => response.json())
-      .then(json => console.log(json))
+// try-catch vs then-catch
+    // try {
+    //     // Code that may throw an error
+    // } catch (error) {
+    //     // Handle the error
+    // } finally {
+    //     // Code that always runs (cleanup code)
+    // }
+    // -handle synchronus errors directly 
 
+    // promise
+    // .then((result) => {
+    //     // Code for successful promise
+    // })
+    // .catch((error) => {
+    //     // Code for rejected promise
+    // })
+    // .finally(() => {
+    //     // Code that always runs (cleanup code)
+    // });
+    // -handle promise 
+
+//     3. Which One Should I Use?
+//      Use try...catch...finally for:
+//      -Synchronous code.
+//      -Async/await error handling.
+
+//      Use .then().catch().finally() for:
+//      -Promise-based code.
+//      -Chainable logic like fetch()
+
+// // dummy data api 
+// fetch('https://jsonplaceholder.typicode.com/posts/100')
+//       .then(response => response.json())
+//       .then(json => console.log(json))
+
+// fetch(`https://jsonplaceholder.typicode.com/posts?userId=1`) - to get all posts of user id 1
+
+
+
+// console.log("Start");
+
+// setTimeout(() => console.log("Timeout 1"));
+
+// setTimeout(() => console.log("Timeout 2"));
+// Promise.resolve().then(() => console.log("Promise 1"));
+
+
+// Promise.resolve().then(() => {
+//     console.log("Promise 2");
+//     return Promise.resolve();
+// }).then(() => console.log("Promise 3"));
+
+// console.log("End");
+// Start
+// End
+// Promise 1
+// Promise 2
+// Promise 3
+// Timeout 1
+// Timeout 2
+
+// execution order 
+// Synchronous Code Runs First
+// Microtasks (Promises & Await) Run Next
+// Macrotasks (setTimeout) Run Last
+
+
+// Promise.reject("Error occurred")
+//     .then(() => console.log("Success"))
+//     .finally(() => console.log("Finally block"));
+
+    // it throws error unhandledPromiseRejecttion
+
+    // let promise = new Promise((resolve, reject) => {
+    //     reject("Error!"); // ❌ Ignored
+    //     resolve("Success!");
+    // });
+    
+    // promise
+    //     .then(result => console.log("Resolved:", result)) // ✅ Resolved: Success!
+    //     .catch(error => console.error("Caught Error:", error)) // ❌ Not executed
+    //     .finally(() => console.log("Cleanup done!")); // ✅ Always runs
+    
+    Promise.resolve(10)
+    .then((num) => {
+        // console.log(num);
+        num * 2;  // No return here
+    })
+    .then((num) => {
+        // console.log(num);//undefind - bcz above then return nothing
+    });

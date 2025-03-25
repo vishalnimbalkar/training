@@ -274,8 +274,8 @@ const f7 = (firstName ,lastName) => {
 }
 // f7(firstName,lastName)
 
-const f8 = (x)=> x*2;
-// console.log(f8(3));
+const f8 = (x)=> {return x*2};
+// console.log("f8",f8(3));
 
 // above function returns x*2 
 // it is same as (x) => {return x*2}
@@ -324,10 +324,10 @@ const result = function (a,c){
 }
 // result(12,32);//[Arguments] { '0': 12, '1': 32 }
 
-// function demo(a, a) {
-//     console.log(a);
-// }
-// demo(1, 2); // 2 in non Strict , error in strict
+function demo(a, a) {
+    // console.log("a ",a);
+}
+demo(1, 2); // 2 in non Strict , error in strict
 
 const object = {
     value: 10,

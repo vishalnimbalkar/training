@@ -11,7 +11,7 @@
 // console.log(' ' == 0);//0 == 0 - true 
 // console.log(null == undefined); // true
 // console.log([] == ![]);//!true =false ->0==0->true
-// console.log([] == []);//
+// console.log([] == []);// false objects are compared based on references
 // console.log('5' === 5);//false
 
 
@@ -59,6 +59,11 @@ function print(num){
 // })
 // console.log(sum);
 //optimize above code?
+// const result = numbers.filter((num)=>{
+//     return num % 2 == 1 ;
+// }).map((ele)=>ele*ele).reduce((acc,ele)=>acc+ele);
+// console.log(result);
+
 
 // const student = {
 //     name: "Alex",
@@ -115,6 +120,7 @@ const transactions = [
     { date: "2023-12-05", description: "gym membership", amount: 80 },
     { date: "2024-02-28", description: "laptop buy", amount: 1500 }
   ];
+
 //   console.log(processTransactions(transactions));
 const filteredTran = transactions.filter((tran)=>{
     return tran['amount']>500;
@@ -130,11 +136,36 @@ const formatedTran = filteredTran.map((tran)=>{
     return tran;
 })
 formatedTran.totalAmount = sumOfTran;
-console.log(formatedTran);
-console.log(sumOfTran);
+// console.log(formatedTran);
+// console.log(sumOfTran);
+// optimized 
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+        return "Invalid Date";
+    }
 
-function processTransactions(transactions){
+    return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
+
+const output = {
+    formattedTransactions: transactions
+        .filter(transaction => transaction.amount > 500)
+        .map(({ date, description, amount }) => ({
+            date: formatDate(date), 
+            description: description.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" "),
+            amount
+        }))
+};
+
+// Calculate totalAmount correctly
+output.totalAmount = output.formattedTransactions.reduce((acc, tran) => acc + tran.amount, 0);
+
+console.log(output);
+
+
   
 //   Expected Output
 //   js

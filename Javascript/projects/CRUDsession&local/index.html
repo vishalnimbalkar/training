@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        th,td{
+            border : 2px solid black;
+        }
+        form{
+            padding: 20px;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <form id="post-form">
+        <input type="text" placeholder="User Id" id="user-id">
+        <input type="text" placeholder="Title" id="title">
+        <textarea type="text" placeholder="Body" id="body"></textarea>
+        <input type="submit" value="submit">
+    </form>
+    <table id="user-table">
+       
+    </table>
+    <script src="server.js"></script>
+</body>
+</html>

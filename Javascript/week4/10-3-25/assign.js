@@ -244,11 +244,11 @@ newEmployee.name = 'Rahul';
 
 // json assignment
 // 1.Create a JSON object for a person with name, age, and city, and access the name property.
-const person = {
-    name : 'Vishal',
-    age : 23,
-    city : 'Pune'
-}
+// const person = {
+//     name : 'Vishal',
+//     age : 23,
+//     city : 'Pune'
+// }
 // console.log(person['name']);
 
 // 2.Convert a JavaScript object into a JSON string.
