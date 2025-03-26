@@ -97,3 +97,27 @@ let num2 = 30;
 // used for user preferences like theme or wesite setting 
 
 // Modular JavaScript (Import/Export, Code Splitting)
+// Module
+// js module allow to break code in separate files
+// this makes easier to maintain code 
+// modules are imported from external files with the help of import statement 
+// modules also rely of type='module' in <script type='module'></script> tag
+// example 
+    // <script type="module">
+    // import message from "./message.js";
+    // </script> 
+
+// Export 
+// functions and variable can be exported from module using export statement 
+// There are two types of exports:
+// 1. Named export 
+// we can create named export two ways in-line individually and all once at bottom
+// -In line individually
+    export const name = 'vishal';
+    export const age = 23;
+// - All at once at the bottom 
+    const email = 'vishal@gamil.com'
+    const password = '2332'
+    export {email, password};
+// 2. Default export 
+// Import 

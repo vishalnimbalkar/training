@@ -162,3 +162,8 @@ console.log(Number.MIN_VALUE);//5e-324
 }
 
 allNumberMethodds()
+
+// accessing exported data 
+const utils = require('./day22.js');
+// import {email , password, name , age } from "./day22.js"
+// console.log(email, password, name , age);

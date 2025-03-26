@@ -1,0 +1,48 @@
+#product-popup, #product-update-popup{
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+#popup{
+    display: none;
+    width: 600px;
+    height:500px;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 1001;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#popup2{
+    display: none;
+    width: 600px;
+    height:500px;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 1001;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+table, th, td {
+    text-align: center;
+}
+
+#update{
+    display: none;
+}
+
+#products{
+    z-index: 1;
+}
+
+#add{
+    position: absolute;
+    right: 0;
+    top: 60px;
+}
