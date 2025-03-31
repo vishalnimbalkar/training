@@ -23,7 +23,7 @@ async function getUser() {
   const data = await user1.json();
   console.log(data);
 }
-// getUser();
+getUser();
 
 // which is better promises with then(), catch() or async await
 // async-await

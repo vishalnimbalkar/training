@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce</title>
+    <title>Document</title>
     <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-    crossorigin="anonymous"
-  />
-  <link rel="stylesheet" href="css/style.css" />
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,10 +33,10 @@
                 <a class="nav-link " aria-current="page" href="index.html">Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="cart.html">Cart(<span id="cart-count">0</span>)</a>
+                <a class="nav-link" href="cart.html">Cart(<span id="cart-count">0</span>)</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="orders.html">Orders</a>
+                <a class="nav-link active" href="orders.html">Orders</a>
               </li>
             </ul>
           </div>
@@ -44,7 +44,7 @@
       </nav>
 
       <div class="products">
-        <h3 class="text-center pt-2">Cart</h3>
+        <h3 class="text-center pt-2">Orders</h3>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -54,13 +54,14 @@
               <th>Price</th>
               <th>Quantity</th>
               <th>Total</th>
-              <th colspan="3" class="text-center">Action</th>
             </tr>
           </thead>
-          <tbody id="projectTableBodyCart"></tbody>
+          <tbody id="projectTableBodyOrders"></tbody>
         </table>
       </div>
 
-    <script src="./js/cart.js"></script>
+    <script src="./js/orders.js"></script>
+    <script src="js/cart.js"></script>
+
 </body>
 </html>

@@ -13,9 +13,13 @@
 // console.log(isNaN("hello"));//true- global method isNaN() returns true if we pass it a character string it try to convert string into number and get NaN
 // console.log(isNaN({}));//true
 // console.log(isNaN(undefined));//true
+// console.log(isNaN(0/0));
+
 
 // // 2. Number.parseInt()
-// console.log( Number.parseInt("   003424"));
+// console.log( Number.parseInt("   -003424"));
+// console.log( Number.parseInt(Infinity));
+// console.log( Number.parseInt(-Infinity));//NaN
 // // console.log( parseInt("   3424"));// global method
 // console.log( Number.parseInt("11.2"));// decimal part is truncated 
 // console.log( Number.parseInt("11dsfkj"));// 11 
@@ -31,6 +35,8 @@
 // console.log(Number.parseFloat('2.2dsfd'));//2.2
 // console.log(Number.parseFloat('   4.3   '));//4.3
 // console.log(Number.parseFloat('addsa4.3'));//NaN
+// console.log( Number.parseFloat(Infinity));
+// console.log( Number.parseFloat(-Infinity));
 
 // Properties
 // 1.Number.MAX_VALUE
@@ -57,6 +63,7 @@
 // console.log(Math.abs(-0));
 // console.log(Math.abs(0));
 // console.log(Math.abs(Infinity));
+// console.log(Math.abs(-Infinity));
 // console.log(Math.abs('-1'));//1
 // console.log(Math.abs(""));//0
 // console.log(Math.abs([]));//0
@@ -102,7 +109,7 @@
 // console.log(Math.max(-10,-20));//-10
 // console.log(Math.max());//-Infinity
 // console.log(Math.max("12","90"));//90 - "12" and "90" is conveted into number
-// console.log(Math.max(Number.MAX_VALUE,Infinity));//
+// console.log(Math.max(1,"   12   "));//
 
 // let arr = [23,23,345,6572,13,"34234"];
 // console.log(Math.max(...arr));
@@ -136,15 +143,22 @@
 
 // Date & its methods 
 // it is used to work with date and time 
-const currentDate = new Date();
-console.log(currentDate.toString())
-console.log(currentDate.toDateString())
-console.log(currentDate.toLocaleString())
-console.log(currentDate.toLocaleDateString())
-let start = Date.now();
-console.log(Date.now());// current date in miliseconds
-console.log(currentDate);// current date
-console.log(currentDate.getDate());//
-console.log(currentDate.setDate(15));//
-console.log(currentDate.toDateString())
+const currentDate = new Date("2021-2-21");
+// console.log(currentDate.toString())
+// console.log(currentDate.toDateString())
+// console.log(currentDate.toLocaleString())
+// console.log(currentDate.toLocaleDateString())
+// let start = Date.now();
+// console.log(Date.now());// current date in miliseconds
+// console.log(currentDate);// current date
+// console.log(currentDate.getDate());//
+// console.log(currentDate.setDate(15));//
+// currentDate.setMonth(0);
+// currentDate.setFullYear(1970)
+
+// console.log(currentDate.toDateString())
+// console.log(new Date(start).toDateString())
+
+// console.log(`${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}`);
+// console.log(currentDate.toLocaleDateString());
 
