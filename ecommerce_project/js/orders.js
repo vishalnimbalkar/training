@@ -3,6 +3,9 @@
     loadOrders();
   })();
 
+  /**
+   * loadOrders function updates UI when we make changes in cart
+   */
 function loadOrders() {
     const orders = JSON.parse(localStorage.getItem("orders")) || [];
 

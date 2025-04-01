@@ -68,6 +68,7 @@
   loadProjects();
 })();
 
+// when click on add product button it will open one popup with add product form
 const addProduct = document
   .getElementById("add-product")
   .addEventListener("click", () => {
@@ -81,6 +82,7 @@ document.getElementById("cancel").addEventListener("click", () => {
   document.getElementById("product-popup").style.zIndex = "-1";
 });
 
+// on submit form product added to a products list
 const formData = document
   .getElementById("product-form")
   .addEventListener("submit", function (event) {
@@ -100,6 +102,9 @@ const formData = document
     this.reset();
   });
 
+  /**
+   * loadProjects function updates UI when we make changes in Products
+   */
 function loadProjects() {
   let products = [];
   if (localStorage.getItem("products")) {
@@ -130,14 +135,11 @@ function loadProjects() {
 }
 
 //update product
-
-  document.getElementById("cancel2").addEventListener("click", () => {
-    console.log("Cancel clicked");
-    document.getElementById("popup2").style.display = "none";
-    document.getElementById("product-update-popup").style.zIndex = "-1";
-  });
-
-function updateProduct(productId) {
+  /**
+   * function take product id as parameter and update that product details 
+   * @param {number} productId - unique id of product
+   */
+  function updateProduct(productId) {
   const popup = document.getElementById("popup2");
   popup.style.display = "block";
   document.getElementById("product-update-popup").style.zIndex = "1001";
@@ -161,6 +163,7 @@ function updateProduct(productId) {
   const updateForm = document.getElementById("product-update-form");
   updateForm.replaceWith(updateForm.cloneNode(true));
 
+  // on submit selected product details updated
   const formData = document
     .getElementById("product-update-form")
     .addEventListener("submit", function (event) {
@@ -181,8 +184,11 @@ function updateProduct(productId) {
 }
 
 
-
 //delete product
+/**
+ * function take product id and delete that product from products
+ * @param {number} productId - unique id of product
+ */
 function deleteProduct(productId) {
   let products = JSON.parse(localStorage.getItem("products"));
   products = products.filter((product) => product.id !== productId);
