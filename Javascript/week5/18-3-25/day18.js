@@ -108,7 +108,7 @@ const message = function msg(){
 // where use IIFE
 // - to initializing values when page reload 
 // -------------------------------------------------------
-// function scope 
+// function and global variable scope 
 // -variables defined inside function cannot accessed outside the function
 // - function can access all variables from global scope 
 // - function does not have access to varaibles and functions declared inside inner function 
@@ -216,12 +216,12 @@ function names(a,b,...c){
 // names('a')
 // a
 // undefined
-// []
+// [] 
 
 // difference between rest parameter and arguments object 
-// 1. rest parameter is array it supports all array methods and properties , arguments is array like object that only supports length property and 0 based indexing
+// 1. rest parameter is array it supports all arra  methods and properties , arguments is array like object that only supports length property and 0 based indexing 
 // 2. rest parameter does not contains any defined arguments before the ...restPara, arguments contains all named defined and rest parameter arguments
-// --------------------------------------------------------------
+// ----------------------------------------------- --------------
 // Arrow function 
 // () => expression
 // - no parameter

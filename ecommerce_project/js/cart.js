@@ -120,44 +120,100 @@ function decrement(id) {
  * @param {number} productId - unique id for product
  */
 function removeProductFromCart(productId) {
+   const deletePopup = document.getElementById('toast')
+  deletePopup.style.display = 'flex'
+  document.getElementById("product-remove").style.zIndex = "1001";
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const products = JSON.parse(localStorage.getItem("products"));
-  cart.forEach((cartProduct, index) => {
-    if (cartProduct.id === productId) {
-      cart.splice(index, 1);
-      delete cartProduct.total;
-      delete cartProduct.productQnt;
-      products.push(cartProduct);
-    }
-  });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  localStorage.setItem("products", JSON.stringify(products));
-  alert("product removed from cart");
-  loadCart();
+  const prod = cart.find((product)=>product.id === productId);
+  const removePara = document.getElementById('remove-msg').innerHTML = `Do you want to Remove <b>${prod.productName}</b>`
+
+  document.getElementById('delete-yes').addEventListener('click',function(){
+    const products = JSON.parse(localStorage.getItem("products"));
+    cart.forEach((cartProduct, index) => {
+      if (cartProduct.id === productId) {
+        cart.splice(index, 1);
+        delete cartProduct.total;
+        delete cartProduct.productQnt;
+        products.push(cartProduct);
+      }
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("products", JSON.stringify(products));
+    deletePopup.style.display = 'none'
+  document.getElementById("product-remove").style.zIndex = "-1";
+    loadCart();
+  })
 }
 
+//  hide toast when click on No 
+document.getElementById('delete-no').addEventListener('click', function (){
+  document.getElementById('toast').style.display = 'none'
+  document.getElementById("product-remove").style.zIndex = "-1";
+})
+document.getElementById('close-remove').addEventListener('click', function (){
+  document.getElementById('toast').style.display = 'none'
+  document.getElementById("product-remove").style.zIndex = "-1";
+})
+
+document.getElementById('toast').addEventListener('click',(event)=>{
+  event.stopPropagation()
+})
+
+document.getElementById('product-remove').addEventListener('click',(event)=>{
+  document.getElementById('toast').style.display = 'none'
+  document.getElementById("product-remove").style.zIndex = "-1";
+})
 /**
  * this function add cart product into orders and remove product from cart
  * @param {number} productId - unique id for product
  */
 function buyProduct(productId) {
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
   const cart = JSON.parse(localStorage.getItem("cart"));
-  let selectedIndex = -1;
-  const buyProduct = cart.find((product, index) => {
-    if (product.id === productId) {
-      selectedIndex = index;
-      return true;
+
+  const deletePopup = document.getElementById('toast2')
+  deletePopup.style.display = 'flex'
+  document.getElementById("product-buy").style.zIndex = "1001";
+   const prod = cart.find((product)=>product.id === productId);
+  document.getElementById('buy-msg').innerHTML = `Do you want to Buy <b>${prod.productName}</b>`
+
+  document.getElementById('buy-yes').addEventListener('click',function(){
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    let selectedIndex = -1;
+    const buyProduct = cart.find((product, index) => {
+      if (product.id === productId) {
+        selectedIndex = index;
+        return true;
+      }
+      return false;
+    });
+    if (buyProduct) {
+      orders.unshift(buyProduct);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      cart.splice(selectedIndex, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
     }
-    return false;
-  });
-  if (buyProduct) {
-    orders.unshift(buyProduct);
-    localStorage.setItem("orders", JSON.stringify(orders));
-    cart.splice(selectedIndex, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product Ordered Successfully");
-    loadCart();
-    console.log(orders);
-  }
+    deletePopup.style.display = 'none'
+    document.getElementById("product-buy").style.zIndex = "-1";
+  })
 }
+
+//  hide toast when click on No 
+document.getElementById('buy-no').addEventListener('click', function (){
+  document.getElementById('toast2').style.display = 'none'
+  document.getElementById("product-buy").style.zIndex = "-1";
+})
+document.getElementById('close-buy').addEventListener('click', function (){
+  document.getElementById('toast2').style.display = 'none'
+  document.getElementById("product-buy").style.zIndex = "-1";
+})
+
+
+document.getElementById('toast2').addEventListener('click',(event)=>{
+  event.stopPropagation()
+})
+
+document.getElementById('product-buy').addEventListener('click',(event)=>{
+  document.getElementById('toast2').style.display = 'none'
+  document.getElementById("product-buy").style.zIndex = "-1";
+})

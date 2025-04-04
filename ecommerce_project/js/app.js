@@ -77,10 +77,22 @@ const addProduct = document
     document.getElementById("product-popup").style.zIndex = "1001";
   });
 
-document.getElementById("cancel").addEventListener("click", () => {
+document.getElementById("cancel").addEventListener("click", (event) => {
+  event.stopPropagation();
   popup.style.display = "none";
   document.getElementById("product-popup").style.zIndex = "-1";
 });
+
+document.getElementById('product-popup').addEventListener('click',(event)=>{
+  event.stopPropagation();
+  popup.style.display = "none";
+  document.getElementById("product-popup").style.zIndex = "-1";
+})
+
+document.getElementById('popup').addEventListener('click',(event)=>{
+  event.stopPropagation();
+})
+
 
 // on submit form product added to a products list
 const formData = document
@@ -155,6 +167,7 @@ function loadProjects() {
     return false;
   });
 
+  //setting form values by default
   document.getElementById("update-product-name").value = selectedProduct.productName;
   document.getElementById("update-product-dsc").value = selectedProduct.productDsc;
   document.getElementById("update-product-price").value = selectedProduct.productPrice;
@@ -183,6 +196,15 @@ function loadProjects() {
     });
 }
 
+document.getElementById('product-update-popup').addEventListener('click',(event)=>{
+  event.stopPropagation();
+  document.getElementById('popup2').style.display = "none";
+  document.getElementById("product-update-popup").style.zIndex = "-1";
+})
+
+document.getElementById('popup2').addEventListener('click',(event)=>{
+  event.stopPropagation();
+})
 
 //delete product
 /**
@@ -190,8 +212,52 @@ function loadProjects() {
  * @param {number} productId - unique id of product
  */
 function deleteProduct(productId) {
+  const deletePopup = document.getElementById('toast')
+  deletePopup.style.display = 'flex'
+  document.getElementById("product-delete").style.zIndex = "1001";
+  const deletePara = document.getElementById('delete-msg');
   let products = JSON.parse(localStorage.getItem("products"));
-  products = products.filter((product) => product.id !== productId);
-  localStorage.setItem("products", JSON.stringify(products));
-  loadProjects();
+
+  const prod = products.find((product)=>product.id === productId);
+  deletePara.innerHTML =`Do you want to delete <b>${prod.productName}</b>`;
+
+  document.getElementById('delete-yes').addEventListener('click',function(){
+    products = products.filter((product) => product.id !== productId);
+    localStorage.setItem("products", JSON.stringify(products));
+    deletePopup.style.display = 'none'
+  document.getElementById("product-delete").style.zIndex = "-1";
+    loadProjects();
+  })
 }
+
+document.getElementById('toast').addEventListener('click',(event)=>{
+  event.stopPropagation()
+})
+
+document.getElementById('product-delete').addEventListener('click',(event)=>{
+  document.getElementById('toast').style.display = 'none'
+  document.getElementById("product-delete").style.zIndex = "-1";
+})
+//  hide toast when click on No 
+document.getElementById('delete-no').addEventListener('click', function (){
+  document.getElementById('toast').style.display = 'none'
+  document.getElementById("product-delete").style.zIndex = "-1";
+})
+
+//to close add product popup when click on cross
+document.getElementById('close').addEventListener('click',()=>{
+  document.getElementById('popup').style.display = 'none'
+  document.getElementById("product-popup").style.zIndex = "-1";
+})
+
+// to close update product popup when click on cross
+document.getElementById('close2').addEventListener('click',()=>{
+  document.getElementById('popup2').style.display = 'none'
+  document.getElementById("product-update-popup").style.zIndex = "-1";
+  document.getElementById('toast').style.display = 'none'
+})
+document.getElementById('close-delete').addEventListener('click',()=>{
+  document.getElementById('toast').style.display = 'none'
+  document.getElementById("product-delete").style.zIndex = "-1";
+})
+
