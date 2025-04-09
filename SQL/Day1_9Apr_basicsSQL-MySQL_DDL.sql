@@ -127,37 +127,37 @@ describe employee;
 desc employee;
 
 -- tricky questions
-1.What’s the difference between SQL and MySQL?
-Answer:
-SQL is the language.
-MySQL is a database management system (DBMS) that uses SQL.
-Explanation:
-Think of SQL as the rules/grammar, and MySQL as the tool that follows those rules.
+-- 1.What’s the difference between SQL and MySQL?
+-- Answer:
+-- SQL is the language.
+-- MySQL is a database management system (DBMS) that uses SQL.
+-- Explanation:
+-- Think of SQL as the rules/grammar, and MySQL as the tool that follows those rules.
 
-2.How does MySQL handle case sensitivity in table and column names across OSes?
-Answer:
-On Linux, table names are case-sensitive.
-On Windows, table names are case-insensitive.
-Column names are always case-insensitive.
-Explanation:
-This is due to the OS file system. Linux is case-sensitive; Windows is not.
+-- 2.How does MySQL handle case sensitivity in table and column names across OSes?
+-- Answer:
+-- On Linux, table names are case-sensitive.
+-- On Windows, table names are case-insensitive.
+-- Column names are always case-insensitive.
+-- Explanation:
+-- This is due to the OS file system. Linux is case-sensitive; Windows is not.
 
-3. Can we have two columns with the same name in a table?
-Answer:
-No. Column names must be unique within a table.
+-- 3. Can we have two columns with the same name in a table?
+-- Answer:
+-- No. Column names must be unique within a table.
 
-4. What’s the difference between DELETE, DROP, and TRUNCATE?
-Answer:
-DELETE removes rows one-by-one and fires triggers.
-TRUNCATE is faster but cannot be rolled back in MySQL.
-DROP removes the entire table structure.
+-- 4. What’s the difference between DELETE, DROP, and TRUNCATE?
+-- Answer:
+-- DELETE removes rows one-by-one and fires triggers.
+-- TRUNCATE is faster but cannot be rolled back in MySQL.
+-- DROP removes the entire table structure.
 
-5.Can you DROP a table that is referenced by a foreign key?
-Answer:
-No — not unless you drop the foreign key constraint first, or disable foreign key checks.
+-- 5.Can you DROP a table that is referenced by a foreign key?
+-- Answer:
+-- No — not unless you drop the foreign key constraint first, or disable foreign key checks.
 
-6.Can you create a table without any columns?
-Answer:
-No. A table must have at least one column.
-Explanation:
-MySQL requires at least one column to store data, even if it's a dummy column
+-- 6.Can you create a table without any columns?
+-- Answer:
+-- No. A table must have at least one column.
+-- Explanation:
+-- MySQL requires at least one column to store data, even if it's a dummy column

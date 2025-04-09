@@ -1,0 +1,2 @@
+-- 1.Understanding of DML (Data Manipulation Language) commands
+-- 2.Explore and apply different data types
