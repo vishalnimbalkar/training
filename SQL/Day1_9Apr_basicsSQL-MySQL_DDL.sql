@@ -89,7 +89,7 @@ alter table employee drop age;
 
 --  4.RENAME 
 --   To rename an existing column
---   syntax - alter table table_name rename column_name old_name to new_name;
+--   syntax - alter table table_name rename column column_name old_name to new_name;
 alter table employee rename column desiganation to desig;
 
 --  5.RENAME TO
@@ -104,6 +104,8 @@ alter table employee rename to emp;
 -- if table have foreign key constraints we cannot truncate table 
 TRUNCATE table employee;
 
+-- RENAME
+-- rename table name in database 
 rename table emp to employee;
  
  -- meeting discussion
@@ -118,7 +120,7 @@ rename table emp to employee;
  alter table employee rename emp;   
 
 -- make email column unique 
-alter table employee modify email varchar(50);
+alter table employee modify email varchar(50) unique;
 
 -- how to get structure of table 
 -- syntax - DESCRIBE table_name;
