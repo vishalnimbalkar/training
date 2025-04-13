@@ -196,3 +196,10 @@ select * from trainee_employee;
 
 -- add 10 in all rows price 
 update trainee_employee set price = ifnull(price,0)+10
+--  if price is null it returns 0
+
+-- IFNULL()
+-- it is function in mysql to handle null values 
+-- syntax - ifnull(expression, replacement_value);
+--  if expression is not null, it returns expresion 
+--  if expresion is null, it returns replacement_value
