@@ -21,7 +21,6 @@ create table employees(
     status enum('active','inactive') not null default 'active',
     foreign key(department_id) references departments(id)
 );
-alter table employees modify salary decimal;
 alter table employees modify status enum('Active', 'Inactive') default 'Active';
 desc employees;
 
@@ -40,20 +39,22 @@ insert into employees values
 (default,'Eva', 'Johnson', 'eva@example.com', '9001122334', '2023-02-14', 'Developer', 48000, 2, 'Active');
 
 select * from employees;
+select * from employees where salary is null;
 
 -- Constraints Testing
 -- 1.Missing first_name or hire_date → What happens?
--- it will give us error
+-- it will give us error bcz both are set to not null
+
 -- 2.Duplicate email → What happens?
 -- we apply unique constraints on email so it will give us error buplicate entry of email
+
 -- 3.job_title set to 'Intern' → What happens?
 update employees set job_title = 'Intern' where emp_id = 1;
--- check constraint is voileted 
+-- error - check constraint is voileted 
 
 -- Operators
-
 -- 1.Write a query to list all employees who have a salary between 45000 and 70000.
-select * from employees where salary between 45000 and 70000;
+select * from employees where salary between 45000 and 45000;
 -- 2.List employees whose name starts with 'A'.
 select * from employees where first_name like 'A%';
 -- 3.Find employees who are in the HR or Manager job title.
@@ -62,3 +63,5 @@ select * from employees where job_title = 'Manager' or job_title = 'HR';
 select * from employees where phone_number is null;
 -- 5.List employees from department 1 or 2 whose salary is more than 48000.
 select * from employees where salary > 48000 and department_id in (1,2);
+select * from employees where salary > (select salary from employees where department_id in (1,2));
+

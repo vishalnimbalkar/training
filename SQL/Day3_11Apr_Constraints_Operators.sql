@@ -1,5 +1,5 @@
 -- #MySQL data constraints and  SQL operators
-
+use demo;
 -- Constraints
 -- sql constraints are used to specified rules for the data in table.
 
@@ -12,7 +12,7 @@ create table persons(
     id int not null,
     name varchar(49) not null,
     email varchar(50),
-    age int,
+    age int check(age >= 18),
     primary key(id)
 ) ;
 -- above query ensures that id and name column not accepts null value 
@@ -86,7 +86,7 @@ select * from persons;
 desc persons;
 insert into persons values(1,'rahul','vishalnimbalkar@gmail.com');
 
--- Note: In the example above there is only ONE PRIMARY KEY (PK_Person). However, the VALUE of the primary key is made up of TWO COLUMNS (ID + LastName).
+-- Note: In the example above there is only ONE PRIMARY KEY (primary_key_person). However, the VALUE of the primary key is made up of TWO COLUMNS (id + email).
 
 -- primary key on alter table 
 drop table persons;
@@ -114,7 +114,7 @@ create table orders(
     qnt int not null,
     total double not null,
     primary key(id),
-    foreign key (personId) REFERENCES  persons(id)
+    constraint const_key foreign key (personId) REFERENCES  persons(id)
 );
 desc orders;
 select * from persons;
@@ -141,7 +141,7 @@ drop table persons;
 create table persons(
     id int,
     email varchar(50),
-    age int,
+    age int ,
     primary key(id),
     check(age >= 18),
     unique(email)
@@ -157,7 +157,7 @@ create table persons(
     email varchar(50),
     age int,
     primary key(id),
-    constraint check(age >= 18 AND email = 'vishal@gmail.com'),
+    constraint check(age >= 18 AND email is not null),
     unique(email)
 );
 
@@ -189,6 +189,7 @@ create table persons(
     created_At datetime default current_timestamp
 );
 desc persons;
+-- check for null on default 
 
 -- default on alter table 
 alter table persons alter email set default 'vishal@gamil.com';
@@ -207,10 +208,14 @@ drop table persons;
 
 -- to change the start of auto_increment use following syntax 
 alter table persons auto_increment = 100;
-insert into persons values(default,'vishal');
+insert into persons(name) values('vishal');
+insert into persons(name) values ('sanket');
 select * from persons;
+insert into persons values (400, 'abc'); -- set auto_increament = 400;
+insert into persons values (default, 'xyz'); -- id = 401
 ----------------------------------------------------------------------------------
 -- #SQL operators
+use demo;
 create table students(
     id int primary key auto_increment,
     name varchar(50) not null,
@@ -247,8 +252,9 @@ update students set roll_no = roll_no * 2;
 -- 2.Comparision Operators 
     -- =	Equal to
     select * from students where name = 'alice';	
+    select * from students where name like '%ce';
     -- >	Greater than	
-    select * from students where marks > 80;
+    select * from students where marks > 80 and name like '%ce';
     -- <	Less than	
     select * from students where marks < 80;
     -- >=	Greater than or equal to
@@ -263,15 +269,11 @@ update students set roll_no = roll_no * 2;
 -- AND	
 -- TRUE if all the conditions separated by AND is TRUE	
 select * from students where marks > 90 and name = 'bob';
-
--- ANY	
--- TRUE if any of the subquery values meet the condition
-insert into students values(default, 'bob',494,89.34);
-select * from students where marks = any(select marks from students where name = 'bob');
 	
 -- BETWEEN	
 -- TRUE if the operand is within the range of comparisons	
 select * from students where marks between 80 and 90;
+
 -- IN	
 -- TRUE if the operand is equal to one of a list of expressions	
 select * from students where name in ('alice', 'David');
@@ -279,14 +281,65 @@ select * from students where name in ('alice', 'David');
 -- NOT	
 -- Displays a record if the condition(s) is NOT TRUE	
 select * from students where not marks > 80;-- gets all students with marks less than 80
+
 -- OR	
 -- TRUE if any of the conditions separated by OR is TRUE	
 select * from students where name = 'alice' or marks >90; -- select all students with name alice and marks greater than 90
--- SOME	
--- TRUE if any of the subquery values meet the condition
+
 -- LIKE	
--- TRUE if the operand matches a pattern	
+-- TRUE if the operand matches a pattern
+select * from students;
+select * from students where name like 'A%'; -- names start with A	
+select * from students where name like 'b%'; -- like is case-insensitive
+select * from students where binary name like 'b%'; -- use binary for case sensitive;
+select * from students where name like '%e';-- names ends with e
+select * from students where name like '%i%'; -- names that contains i
+
+select * from students where name like '_o_';
+
+
+-- Is 
+-- it used to comparing null or boolean expression 
+select * from students where marks is null; -- this returns rows with marks null
+select * from students where marks = null; -- this is not working null=null is false, bcz null is 'unknown' 
+select * from students where marks is not null; -- this returns rows with values
+
+-- suppose students have boolean column isPresent
+select * from students where isPresent is true;
+select * from students where isPresent is false;
+-- using = works same 
+select * from students where isPresent = true;
+select * from students where isPresent = false;
+
+-- Expression	      Meaning
+-- IS NULL	        Value is NULL
+-- IS NOT NULL	    Value is not NULL
+-- IS TRUE	        Boolean value is TRUE
+-- IS FALSE	    Boolean value is FALSE
+-- IS UNKNOWN	    Value is NULL (in logic)
+
+-- which one is use is or =
+-- when dealing with null use 'is'
+-- when dealing with values use '='
+-- when dealing with true/false use both 
+
+-- ANY	
+-- returns TRUE if any of the subquery values meet the condition
+use assignments;
+select * from employees;
+select * from departments where id = any (select department_id from employees); 
+-- above query is equal to 
+select * from departments where id in (1,2,3);
+
 -- ALL	
--- TRUE if all of the subquery values meet the condition	
+-- returns TRUE if all of the subquery values meet the condition	
+select max(salary) from employees where job_title = all(select job_title from employees where job_title = 'developer');
+
 -- EXISTS	
--- TRUE if the subquery returns one or more records	
+-- returns TRUE if the subquery returns one or more records	
+select * from departments;
+-- get departments those are present in employees table 
+select * from departments where exists (select department_id from employees where departments.id = employees.department_id);
+
+-- get departments those are not present in employees table 
+select * from departments where not exists (select department_id from employees where departments.id = employees.department_id);
