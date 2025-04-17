@@ -77,3 +77,32 @@ delete from employees where department_id = 3;
 delete from employees where salary = (select max(salary) from employees);
 select max(salary) from employees;
 
+-- 6. GROUP_CONCATE(expression)
+-- returns concatenaed string of values 
+select * from students;
+select group_concat(name) from students; -- Alice,Bob,Charlie,David,Eva,bob,vishal,vishal
+select group_concat(class_no) from students; -- 100,101,102,a,null,100c,102b,c100 - it works on null values 
+select group_concat(name separator '-') from students; -- by default it uses ',' as separator but we can spcify separator using 'separator' keyword 
+-- output - Alice-Bob-Charlie-David-Eva-bob-vishal-vishal
+select group_concat(isPresent) from students; -- if column contains all null values it will return null
+-- if column contains singal value it returns that value without separator
+
+-- 7.JSON_ARRAYAGG(expression)
+-- Aggregates values into json array 
+select json_arrayagg(name) from students; 
+-- ["Alice", "Bob", "Charlie", "David", "Eva", "bob", "vishal", "vishal"]
+select json_arrayagg(class_no) from students; -- ["100", "101", "102", "a", "null", "100c", "102b", "c100"] - works on null
+select json_arrayagg(isPresent) from students; -- [null, null, null, null, null, null, null, null]
+
+
+-- 8.JSON_OBJECTAGG(KEY, VALUE)
+-- Aggregates rows into json object, where each key maped with value
+-- returns null if result contains no row
+-- error occurs when value of key column is null or number or arguments is not 
+select json_objectagg(id, class_no) from students;-- {"1": "100", "2": "101", "3": "102", "4": "a", "5": "null", "6": "100c", "7": "102b", "10": "c100"}
+select json_objectagg( id, isPresent) from students; -- {"1": null, "2": null, "3": null, "4": null, "5": null, "6": null, "7": null, "10": null}
+select json_objectagg( class_no, id) from students; -- error bcz class_no contains null values
+select json_objectagg(isPresent, name ) from students;-- {"1": "vishal"} - if all values of key column are same then last value of value column is assign to single key
+update students set isPresent = true where id = 10;
+update students set class_no = null where id = 5;
+select * from students;

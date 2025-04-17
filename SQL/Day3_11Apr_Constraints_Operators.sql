@@ -343,3 +343,4 @@ select * from departments where exists (select department_id from employees wher
 
 -- get departments those are not present in employees table 
 select * from departments where not exists (select department_id from employees where departments.id = employees.department_id);
+
