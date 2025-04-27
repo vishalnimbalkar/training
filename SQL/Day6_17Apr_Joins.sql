@@ -198,12 +198,39 @@ join users a
 on a.id = b.customer_id
 join users c on c.id = b.driver_id;
 
+select * from bookings;
+select * from users;
+
 -- Aggregated JOIN Questions
 -- 1.Show the total number of bookings made by each customer.
+select c.name, count(b.customer_id) as no_of_bookings
+from bookings b 
+join users c 
+on c.id = b.customer_id
+group by b.customer_id;
 
 -- 2.List drivers and the total fare they earned from completed bookings.
+select d.name, b.driver_id,sum(fare) 
+from bookings b 
+join users d
+on b.driver_id = d.id
+where booking_status = 'Completed'
+group by b.driver_id;
+
 -- 3.Find the average fare per driver.
+select b.driver_id, avg(b.fare) 
+from bookings b 
+join users d 
+on b.driver_id = d.id
+group by b.driver_id;
+
 -- 4.List customers who made more than 3 bookings.
+select c.name, count(b.customer_id) 
+from bookings b 
+join users c 
+on b.customer_id = c.id
+group by b.customer_id;
+
 -- 5.Get the total fare paid by each customer.
 
 create table customers(
@@ -263,7 +290,19 @@ INSERT INTO orders (order_id, customer_id, order_date, amount) VALUES
  from orders o
  join customers c 
  on o.customer_id = c.customer_id;
- -- 2.Show all customers, even if they haven't placed an order
- 
+
+-- apply joins on more than two tables
+    -- syntax - 
+    -- SELECT columns
+    -- FROM table1
+    -- JOIN table2 ON table1.col = table2.col
+    -- JOIN table3 ON table2.col = table3.col
+    -- ...and so on
+    
+
+ select e.first_name, e.last_name , d.department_name, m.manager_name
+ from employee e
+ join departments d on d.department_id = e.department_id
+ join managers m on m.manager_id = e.manager_id;
  
 

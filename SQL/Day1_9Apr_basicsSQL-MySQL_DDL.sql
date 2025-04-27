@@ -2,7 +2,7 @@
 -- SQL
 -- sql is structured query language.
 -- it is used to manage relational databases.
--- sql us used in various RDBMS like MySQL, oracle, postgresql.
+-- sql is used in various RDBMS like MySQL, oracle, postgresql.
 
 -- MySQL
 -- MySQL is a open source relational database management system (RDBMS) that uses sql to manage data.
@@ -14,7 +14,7 @@
 -- column names are case-insensitive name, Name, and NAME are same.
 
 -- create database demo;
- -- use demo;
+ use demo;
 
 -- DDL (Data Definition Language)
 -- DDL use to defining, altering, and deleting database structure like database, tables.
@@ -77,6 +77,8 @@ drop table employee;
 alter table employee add age int;
 select * from employee;
 
+alter table employee add department varchar(50);
+desc employee;
 --  2.MODIFY 
 --   To change the data type of an existing column
 --   syntax - alter table table_name modify column_name datatype;

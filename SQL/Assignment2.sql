@@ -56,6 +56,7 @@ from employee e
 join departments d
 on e.department_id = d.department_id
 where d.department_id = 6 and e.salary > 40000;
+select * from employee where salary > 40000 and department_id = 6;
 
 -- 	Q2. Write a query to find departments where more than 2 employees are working.
 select e.department_id, count(e.department_id) emp_cnt
