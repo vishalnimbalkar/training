@@ -22,7 +22,9 @@ CREATE TABLE vehicles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
+show create table bookings;
+alter table bookings drop foreign key bookings_ibfk_4;
+alter table bookings drop column driver_id;
 CREATE TABLE bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
@@ -36,7 +38,9 @@ CREATE TABLE bookings (
     FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
+alter table bookings add FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE;
 select * from bookings;
+desc bookings;
 select * from users;
 CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,12 +61,26 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+show create table bookings;
 select * from admin;
 select * from users;
 select * from bookings;
 select * from payments;
-select * from admin;
+desc vehicles;
+select * from vehicles;
 insert into admin values (default, 'Vishal Nimbalkar', 'vishalnimbalkar78@gmail.com','Vishal@123',default);
 delete from users where id = 1;
+select * from vehicles where driver_id = 32;
+DELIMITER $$
 
+CREATE TRIGGER before_booking_update
+BEFORE UPDATE ON bookings
+FOR EACH ROW
+BEGIN
+    IF OLD.driver_id IS NULL AND NEW.driver_id IS NOT NULL THEN
+        SET NEW.booking_status = 'accepted';
+    END IF;
+END$$
+
+DELIMITER ;
 

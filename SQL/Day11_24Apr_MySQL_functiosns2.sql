@@ -135,7 +135,7 @@ select now();
 -- function returns current date and time
 -- Note: The date and time is returned as "YYYY-MM-DD HH:MM:SS" (string) or as YYYYMMDDHHMMSS.uuuuuu (numeric).
 -- syntax - NOW();
-select current_timestamp(); 
+select current_timestamp();
 -- both now() and current_timestamp() works same 
 
 -- 3.CURDATE()
@@ -167,6 +167,9 @@ select date_add(now(), interval 10 month);
 select date_add(now(), interval 10 minute);
 select date_add(now(), interval 10 hour);
 select date_add(now(), interval -20 hour); -- substract 20 hours
+
+select date_add(current_timestamp(), interval 45 minute);
+select date_sub(current_timestamp(), interval 45 minute);
 
 -- 5.DATE_SUB()
 -- functions substract time/date interval to a date and returns date.
@@ -252,7 +255,7 @@ select date_format(now(), '%d %m %Y');
 select time(now());
 select curtime();
 select current_time();
-select date_format(now(), '%W, %b %Y');
+select date_format(now(), '%W, %m %Y');
 
 -- 8.YEAR()
 -- function extract year from given date 
@@ -334,6 +337,8 @@ select isnull(null);-- 1
 -- syntax - coalesce(val1, val2, ... valN);
 select coalesce(null, 'vishal',2333, true, null);
 select coalesce(null, null, null); -- null
+select * from products;
+select coalesce(salary) from employee;
 
 -- 5.CASE
 -- The CASE statement goes through conditions and return a value when the first condition is met (like an IF-THEN-ELSE statement).
@@ -347,6 +352,12 @@ select coalesce(null, null, null); -- null
 --     when condition then resultN
 --     else result
 -- end;
+select salary,case
+when salary < 50000 then 'jr dev'
+when salary > 50000 then 'sr dev'
+else 'manager'
+end
+from employee;
 
 select salary, 
 case
@@ -414,15 +425,10 @@ select user(); -- root@localhost
 
 --  Date Functions
 -- ADDDATE, ADDTIME, CURDATE, CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP,
--- CURTIME, DATE, DATEDIFF, DATE_ADD, DATE_FORMAT, DATE_SUB, DAY, DAYNAME,
--- DAYOFMONTH, DAYOFWEEK, DAYOFYEAR, EXTRACT, FROM_DAYS, HOUR, LAST_DAY,
--- LOCALTIME, LOCALTIMESTAMP, MAKEDATE, MAKETIME, MICROSECOND, MINUTE,
--- MONTH, MONTHNAME, NOW, PERIOD_ADD, PERIOD_DIFF, QUARTER, SECOND,
--- SEC_TO_TIME, STR_TO_DATE, SUBDATE, SUBTIME, SYSDATE, TIME, TIME_FORMAT,
--- TIME_TO_SEC, TIMEDIFF, TIMESTAMP, TO_DAYS, WEEK, WEEKDAY, WEEKOFYEAR,
--- YEAR, YEARWEEK
+-- CURTIME, DATE, DATEDIFF, DATE_ADD, DATE_FORMAT, DATE_SUB, DAY, DAYNAME, HOUR, MINUTE,
+-- MONTH, MONTHNAME, NOW, SECOND,TIME, TIMEDIFF, TIMESTAMP, WEEK, YEAR
 
 --  Advanced Functions
--- BIN, BINARY, CASE, CAST, COALESCE, CONNECTION_ID, CONV, CONVERT,
--- CURRENT_USER, DATABASE, IF, IFNULL, ISNULL, LAST_INSERT_ID, NULLIF,
+-- CASE, CAST, COALESCE, CONNECTION_ID, CONVERT,
+-- CURRENT_USER, DATABASE, IF, IFNULL, ISNULL, LAST_INSERT_ID,
 -- SESSION_USER, SYSTEM_USER, USER, VERSION

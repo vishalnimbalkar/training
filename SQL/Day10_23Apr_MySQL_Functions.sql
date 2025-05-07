@@ -90,7 +90,6 @@ SHOW FUNCTION STATUS WHERE Db = 'company';
 -- stored procedure - can use both 
 -- view - deterministic is recommended for predictibility
 
-
 show create function square;
 -- 	Function	sql_mode	Create Function	character_set_client	collation_connection	Database Collation
 -- 	square	ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION	CREATE DEFINER=`root`@`localhost` FUNCTION `square`(num int) RETURNS int
@@ -162,7 +161,7 @@ select char_length('vishal  @&^%*^@%');
 -- syntax - concat(exp1,exp2...expN);
 -- if any of the expression is null returns null
 select concat('hello ','everyone');-- 
-select concat('hello', null); -- null-- 
+select concat('hello', null); -- null-
 select concat(name," sir") from employee;
 
 -- 3.CONCAT_WS()
@@ -197,6 +196,8 @@ select format(1333332.233324, 10);-- 1,333,332.2333240000
 -- number - number of characters we replace
 -- string2 - a string that we insert.
 
+select insert(name,5,10,' Hello') from employee;
+
 select insert('hello world', 7, 6,'vishal'); -- index is start with 1 not 0
 -- if any of the parameter is null it returns null 
 -- if position is outside the length of string it returns string
@@ -205,6 +206,7 @@ select insert('hello world', 7, 6,'vishal'); -- index is start with 1 not 0
 -- function returns the position of first occurence of string in another string
 -- case-insensitive
 -- syntax - instr(string1, string2);
+select instr(name, 'l') from employee;
 
 select instr("vishal","z");
 -- if string is not present returns 0
@@ -267,6 +269,7 @@ select locate('is', 'what is your name?',8);
 select position('is' in 'what is your name');
 -- if we pass null to any parameter it will return null 
 
+select substr('my name is vishal', 4,1);
 -- 13.SUBSTR()
 -- function extract substring from a string (starting at any position)
 -- note: SUBSTR() and  MID() are equal to SUBSTRING() function.
@@ -283,7 +286,7 @@ select substr('vishal', -4,3) ;
 select substring("My name is vishal",4);
 select substring("My name is vishal",4,7);
 select substring("My name is vishal",4,null);
-select substring("My name is vishal",-4);
+select substring("My name is vishal",-4,2);
 
 select mid("My name is vishal",4);
 select mid("My name is vishal",4,7);
@@ -320,6 +323,8 @@ select rtrim('   vishal  ');--    vishal
 -- return values - 
 -- if string is not found in string_list then it returns 0
 select find_in_set('vishal','hello,my,name,is,rahul,vishal');
+select find_in_set('vishal',group_concat(name)) from employee;
+
 -- if string or string_list is null function returns null
 select find_in_set('vishal',null);
 select find_in_set(null,'hello,my,name,is,rahul');
