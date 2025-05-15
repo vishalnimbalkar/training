@@ -173,3 +173,45 @@ app.get('/get',(req, res)=>{
 // res.write() , res.status(), res.set(), res.header(), res.type(), res.cookie() these methods are not end process 
 
 // Http response status code 
+// It wheather a specific http request has been successfully completed or not
+// response are group in five types 
+// 1.Informatinal Response 
+// between 100 to 199
+// 100 - continue 
+// 101 - switching protocols 
+// 102 - processing
+// 103 - early hints 
+
+// 2.Successfull Response
+// 200 - ok (request successful)
+// 201 - created (resource created, used with post)
+// 202 - accepted
+// 203 Non-Authoritative Information
+// 204 - no content (success but no content body, used with delete)
+// 205 Reset Content
+// 206 Partial Content
+// 207 Multi-Status 
+// 208 Already Reported
+// 226 IM Used
+
+// 3.Redirection response
+// 300 Multiple Choices
+// 301 Moved Permanently
+// 302 Found
+// 303 See Other
+// 304 Not Modified
+// 307 Temporary Redirect
+// 308 Permanent Redirect
+
+// 4.client error response 
+// 400 Bad Request - invalid data, invalid syntax 
+// 401 Unauthorized - client must authenticate before accessing resource 
+// 403 - forbidden - client does not have permission to access resource
+// 404 Not found - resource dosn't exists 
+// 408 Request Timeout
+// 409 Conflict - Duplicate data (trying to register with existing email)
+
+// 5.server error response 
+// 500 Internal server error 
+// 502 Bad Gateway
+// 503 Service Unavailable: Server down or overloaded.

@@ -2,6 +2,9 @@
 // first res is send to client and then gives error to nodejs 
 
 // diff put vs patch 
+// put - use to replace entire resource 
+// patch - partial replacement of resource 
+
 // use cases of params and query 
 // params - to delete, update, get specific record
 // query - filtring and searching - when we need to filter result based on criteria
@@ -39,6 +42,7 @@
 // returns allowed methods like: GET, POST, PATCH 
 const express = require('express');
 const app = express();
+const http = require('http');
 
 // app.use(express.json());
 // app.use() is used to use middlewares 
@@ -79,10 +83,29 @@ app.options('/user',(req, res)=>{
 })
 
 // can we set host 
-// app.listen vs http.createServer()
+// app.listen() vs http.createServer()
+
 // internal working 
+// 1. http.createServer()
+// Belongs to the built-in http module in Node.js.
+// Used to create a basic HTTP server.
+// You manually handle requests and responses.
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hello World\n');
+  });
+  
+  server.listen(3001, () => {
+    console.log('Server running at 3001');
+  });
+
+
+// 2. app.listen()
+// Provided by the Express.js framework, which is built on top of Node.js.
+// Internally uses http.createServer() under the hood.
 app.listen(3000,()=>console.log('server listern to port 3000'))
 
 // note:
-// if we have two matching routes with mehtod only the first matching route is executed others are ignored
+// if we have two matching routes with same route mehtod only the first matching route is executed others are ignored
 // -----------------------------------------------

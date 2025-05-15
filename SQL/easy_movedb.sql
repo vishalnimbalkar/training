@@ -72,6 +72,7 @@ insert into admin values (default, 'Vishal Nimbalkar', 'vishalnimbalkar78@gmail.
 delete from users where id = 1;
 select * from vehicles where driver_id = 32;
 DELIMITER $$
+update bookings set driver_id = null, booking_status = 'pending' where id = 43;
 
 CREATE TRIGGER before_booking_update
 BEFORE UPDATE ON bookings
@@ -83,4 +84,47 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+INSERT INTO vehicles (driver_id, vehicle_type, vehicle_number, capacity, status, created_at) VALUES
+(32, 'Truck', 'KA01AB1234', 1000, 'available', NOW()),
+(32, 'Van', 'MH12CD5678', 500, 'unavailable', NOW()),
+(32, 'Mini Truck', 'DL08EF9012', 750, 'available', NOW()),
+(32, 'Bike', 'TN09GH3456', 100, 'available', NOW()),
+(32, 'Pickup', 'RJ14IJ7890', 600, 'unavailable', NOW());
+
+
+INSERT INTO users (name, email, password, phone, role, created_at) VALUES
+-- Customers
+('Alice Johnson', 'alice@example.com', 'hashedpassword1', '9876543210', 'customer', NOW()),
+('Bob Smith', 'bob@example.com', 'hashedpassword2', '9123456780', 'customer', NOW()),
+('Charlie Brown', 'charlie@example.com', 'hashedpassword3', '9988776655', 'customer', NOW()),
+('Diana Prince', 'diana@example.com', 'hashedpassword4', '9090909090', 'customer', NOW()),
+('Ethan Ray', 'ethan@example.com', 'hashedpassword5', '9012345678', 'driver', NOW()),
+('Fiona Green', 'fiona@example.com', 'hashedpassword6', '9112233445', 'driver', NOW()),
+('George White', 'george@example.com', 'hashedpassword7', '9321654987', 'driver', NOW()),
+('Hannah Lee', 'hannah@example.com', 'hashedpassword8', '9445566778', 'driver', NOW());
+
+
+create database products_db;
+create table products(
+id int primary key auto_increment,
+product_name varchar(50),
+product_qnt int,
+product_price decimal(10,2),
+created_At timestamp default current_timestamp
+);
+
+INSERT INTO products (product_name, product_qnt, product_price) VALUES
+('Wireless Mouse', 150, 25.99),
+('Mechanical Keyboard', 75, 59.99),
+('HD Monitor', 30, 199.99),
+('USB-C Cable', 300, 9.49),
+('Laptop Stand', 120, 34.95),
+('External Hard Drive', 50, 89.90),
+('Bluetooth Speaker', 80, 45.00),
+('Webcam 1080p', 60, 55.49),
+('Gaming Chair', 20, 129.99),
+('Desk Lamp', 100, 22.75);
+
+select * from products;
 
