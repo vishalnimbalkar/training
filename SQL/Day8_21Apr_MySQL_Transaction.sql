@@ -102,7 +102,7 @@ release savepoint money_transfered;
 
 -- Example : -
 -- ensures no dirty read when checking balance
-select * from account;
+
 begin;
 update account set balance = balance - 500 where account_no = 1;
 update account set balance = balance + 500 where account_no = 2; 
@@ -149,6 +149,7 @@ commit;
  -- -----------------------------------------------------------------------
  -- how to check which transaction is active
  SELECT * FROM information_schema.innodb_trx;-- get all transaction details
+ 
 SHOW PROCESSLIST; -- shows which sessions are running
 show engine InnoDB status;
 --   TRANSACTIONS
@@ -193,3 +194,14 @@ release savepoint s1;
 select @@autocommit;
 set autocommit = 0;
 -- set global transaction isolation level 
+update account set balance = 5000;
+select * from account;
+
+start transaction;
+savepoint s1;
+update account set balance = balance - 500 where account_no = 1;
+savepoint s2;
+update account set balance = balance + 500 where account_no = 2;
+commit;
+rollback to savepoint s2;
+rollback;

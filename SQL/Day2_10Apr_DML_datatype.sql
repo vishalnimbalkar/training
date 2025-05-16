@@ -36,7 +36,10 @@ select * from trainee_employee;
 insert into employee (name ,email) select name , email from trainee_employee;
 select * from employee;
 -- column count should be match other wise it will give error
-
+desc students;
+insert into students (roll_no, name, division,dept_id) values (55,'vishal', "C", 1);
+update students set name = 'rahul', roll_no = 33 where id = 1;
+select * from students;
 -- 2.UPDATE
 -- it is used to midify existing records from the table 
 --  we can update one or multiple column at a time using SET cluase
@@ -185,7 +188,7 @@ alter table trainee_employee drop joining_date_time;
 -- A timestamp. TIMESTAMP values are stored as the number of seconds since the Unix epoch ('1970-01-01 00:00:00' UTC). Format: YYYY-MM-DD hh:mm:ss. The supported range is from '1970-01-01 00:00:01' UTC to '2038-01-09 03:14:07' UTC. Automatic initialization and updating to the current date and time can be specified using DEFAULT CURRENT_TIMESTAMP and ON UPDATE CURRENT_TIMESTAMP in the column definition
 ALTER table trainee_employee add created_At timestamp default current_timestamp;
 ALTER table trainee_employee add updated_At timestamp default current_timestamp on update current_timestamp;
-
+select * from students;
 
 -- 5.YEAR	
 -- A year in four-digit format. Values allowed in four-digit format: 1901 to 2155, and 0000.

@@ -62,8 +62,7 @@ select random_number(10);
 -- “Hey, don’t cache this! Recalculate the result every time the function runs!”
 
 -- Example :- add two numbers
-delimiter //
-
+delimiter 
 create function add_numbers(number1 int, number2 int) returns int
 deterministic 
 begin 
@@ -81,7 +80,10 @@ drop function add_numbers;
 select add_numbers(10,10);
 
 -- view all user defined functoins
+SHOW FUNCTION STATUS ;
+-- view all fuctions for specific database
 SHOW FUNCTION STATUS WHERE Db = 'company';
+
 
 -- Questions
 -- where we can use user defined functions
@@ -89,8 +91,9 @@ SHOW FUNCTION STATUS WHERE Db = 'company';
 -- update and insert - can use both 
 -- stored procedure - can use both 
 -- view - deterministic is recommended for predictibility
-
+show create table customer;
 show create function square;
+
 -- 	Function	sql_mode	Create Function	character_set_client	collation_connection	Database Collation
 -- 	square	ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION	CREATE DEFINER=`root`@`localhost` FUNCTION `square`(num int) RETURNS int
 --      DETERMINISTIC

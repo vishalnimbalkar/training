@@ -1,3 +1,4 @@
+show create procedure get_max_salary;
 -- Store Proceduce
 -- It is named group of statements that are store in database and can be reused when we call it.
 -- syntax -

@@ -62,7 +62,7 @@ console.log('hello')
 // --save-dev
 // this command adds packages in devdependencies
 
-// package used duding development added into devDependencies
+// package used during development added into devDependencies
 
 // # package-lock.json
 // file is created when we add packages in package.json file 

@@ -1,12 +1,6 @@
 const { pool } = require("../config/database");
-// use fields instead of * - done
-// function is always return - done
-// add comments
-//optimize update function
-// get top five records
-// filter records
-// count records
-// check purpose of all apis
+const { generateToken } = require("../middlewares/jwt.js");
+const jwt = require('jsonwebtoken')
 
 /**
  * function to get all products
@@ -17,16 +11,14 @@ const getAllProducts = async (req, res) => {
     const [result] = await pool.query(
       `select id, product_name, product_price, product_qnt, created_At from products`
     );
-    // return response 200 ok with result
     return res.status(200).json(result);
   } catch (error) {
-     // Return 500 error if something goes wrong
     return res.status(500).json({ message: "Failed to get Products" });
   }
 };
 
 /**
- * function to get product by using id 
+ * function to get product by using id
  */
 const getProduct = async (req, res) => {
   try {
@@ -35,7 +27,7 @@ const getProduct = async (req, res) => {
     //Query to get product details based on product id
     const query = `select id, product_name, product_price, product_qnt from products where id = ?`;
     const [row] = await pool.query(query, id);
-    //check data is available or not 
+    //check data is available or not
     if (row.length > 0) {
       // return response 200 ok with product details
       return res.status(200).json(row[0]);
@@ -44,13 +36,12 @@ const getProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
-     // Return 500 error if something goes wrong
     return res.status(500).json({ message: "Failed" });
   }
 };
 
 /**
- * function to add new product 
+ * function to add new product
  */
 const addProduct = async (req, res) => {
   try {
@@ -60,13 +51,12 @@ const addProduct = async (req, res) => {
       req.body.product_qnt,
       req.body.product_price,
     ];
-    //Query to insert product 
+    //Query to insert product
     const query = `insert into products (product_name, product_qnt, product_price) values (?,?,?)`;
     const result = await pool.query(query, data);
     // return response 200 ok when data added successfully
     return res.status(200).json({ message: "Product added successfully" });
   } catch (error) {
-     // Return 500 error if something goes wrong
     return res.status(500).json({ message: "Failed to add product" });
   }
 };
@@ -78,12 +68,12 @@ const updateProduct = async (req, res) => {
   try {
     //access product id from url and convert it into number
     const id = Number(req.params.product_id);
-    if(Number.isNaN(id)){
-      return res.status(400).json({message : "Invalid product id"})
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ message: "Invalid product id" });
     }
     //access product details from request body
     const { product_name, product_qnt, product_price } = req.body;
-  
+
     // Map of fields to be updated
     const fields = {
       product_name,
@@ -104,9 +94,11 @@ const updateProduct = async (req, res) => {
 
     // If no valid fields to update
     if (updates.length === 0) {
-      return res.status(400).json({ message: "No valid fields provided for update." });
+      return res
+        .status(400)
+        .json({ message: "No valid fields provided for update." });
     }
-    
+
     // push product id at the end to update spicified product
     values.push(id);
 
@@ -118,10 +110,8 @@ const updateProduct = async (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Product not found." });
     }
-    // return response 200 ok when product is updated successfully
     return res.status(200).json({ message: "product updated successfully" });
   } catch (error) {
-     // Return 500 error if something goes wrong
     return res.status(500).json({ message: "Failed to update product" });
   }
 };
@@ -140,10 +130,8 @@ const deleteProduct = async (req, res) => {
       // return 404 not found if id is not present
       return res.status(404).json({ message: "Product not found." });
     }
-    //return 200 ok if product id deleted successfully
     return res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
-     // Return 500 error if something goes wrong
     return res.status(500).json({ message: "Failed to delete product" });
   }
 };
@@ -177,10 +165,8 @@ const replaceProduct = async (req, res) => {
       //return 404 not found if product id is not present
       return res.status(404).json({ message: "Product not found." });
     }
-    //return 200 ok when product updated successfully
     return res.status(200).json({ message: "product updated successfully" });
   } catch (error) {
-     // Return 500 error if something goes wrong
     return res.status(500).json({ message: "Failed to update product" });
   }
 };
@@ -191,5 +177,5 @@ module.exports = {
   getProduct,
   updateProduct,
   deleteProduct,
-  replaceProduct,
+  replaceProduct
 };

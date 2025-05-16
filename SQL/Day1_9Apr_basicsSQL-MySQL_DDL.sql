@@ -3,6 +3,12 @@
 -- sql is structured query language.
 -- it is used to manage relational databases.
 -- sql is used in various RDBMS like MySQL, oracle, postgresql.
+-- SQL (Structured Query Language) is a standard programming language used to manage and manipulate relational databases. It is used for tasks such as:
+-- Querying data (using SELECT)
+-- Inserting new records (using INSERT)
+-- Updating existing data (using UPDATE)
+-- Deleting records (using DELETE)
+-- Creating and modifying database structures (using CREATE, ALTER, DROP)
 
 -- MySQL
 -- MySQL is a open source relational database management system (RDBMS) that uses sql to manage data.
@@ -48,6 +54,17 @@ create table employee(
     desiganation varchar(50)
 );
 
+create database practice;
+use practice;
+create table student(
+	id int primary key auto_increment,
+    roll_no int not null, 
+    full_name varchar(50) not null,
+    marks decimal(10, 2) not null,
+    division enum('A','B','C','D') not null default 'A',
+    created_At timestamp default current_timestamp
+);
+desc student;
 -- DROP
 --  it is used to delete database or table permanantly
 -- DROP DATABASE
@@ -64,12 +81,40 @@ drop database if exists demo;
 --  it delete table permanantly from database along with all its data.
 --  syntax - drop table table_name;
 drop table employee;
+drop table if exists emp;
 
 -- ALTER TABLE 
 -- it allows to modify the structure of table 
---  we can add new columns, modify existing columns, deleting tables or rename them.
+--  we can add new columns, modify existing columns, deleting columns or rename them.
 --  we can add constraints, modify data types 
 --  syntax - ALTER TABLE table_name [add/drop/modify] colunm_name datatype;
+
+create table deparment(
+	id int primary key auto_increment,
+    dept_name varchar(50)
+);
+alter table deparment rename to department;
+alter table student add department_name varchar(50) not null;
+alter table student modify department_name varchar(40) null;
+alter table student drop department_name;
+alter table student add dept_id int;
+alter table student add constraint foreign key(dept_id) references department(id) ;
+
+insert into department values (default, 'hr'),(default, 'IT');
+insert into students values (default, 11, 'vishal nimbalkar', 55.55, 'A', default, 1);
+truncate table department;
+delete from department where id =1;
+delete from student where id =1;
+alter table student drop constraint student_ibfk_1;
+alter table student modify roll_no int unique;
+desc students;
+
+alter table student rename column full_name to name;
+alter table student rename to students;
+rename table students to student;
+
+
+
 
 --  1.ADD 
 --   it is used to add new column in existing table 
@@ -105,7 +150,14 @@ alter table employee rename to emp;
 -- syntax - TRUNCATE table table_name;
 -- if table have foreign key constraints we cannot truncate table 
 TRUNCATE table employee;
+select * from students;
+select * from department;
+alter table students add dept_id int;
+alter table students add constraint foreign key(dept_id) references department(id);
+truncate table department;
 
+
+truncate table students;
 -- RENAME
 -- rename table name in database 
 rename table emp to employee;

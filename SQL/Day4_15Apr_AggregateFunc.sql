@@ -47,7 +47,7 @@ select count(distinct name, marks) from students; -- return how many different n
 select distinct name from students;
 
 select count(department_id) from employees;
-select sum(first_name) from employees;
+select sum(first_name) from employees; -- error
 
 -- 4.SUM()
 -- returns total sum of numeric column 
@@ -76,7 +76,7 @@ select first_name, last_name, email from employees where salary > (select avg(sa
 delete from employees where department_id = 3;
 delete from employees where salary = (select max(salary) from employees);
 select max(salary) from employees;
-
+select group_concat(name separator '/') from employee;
 -- 6. GROUP_CONCATE(expression)
 -- returns concatenaed string of values 
 select * from students;
@@ -106,3 +106,6 @@ select json_objectagg(isPresent, name ) from students;-- {"1": "vishal"} - if al
 update students set isPresent = true where id = 10;
 update students set class_no = null where id = 5;
 select * from students;
+
+select json_arrayagg(name) from employee;
+select json_objectagg(id, name) from employee;

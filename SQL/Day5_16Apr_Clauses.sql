@@ -7,8 +7,9 @@ create table employees(
     status enum('Active','Inactive') default 'Active',
     job_title varchar(10) check (job_title in ('HR','Manager','Developer','tester')),
     department_id int not null,
-    foreign key(department_id) references departments(id)
+    foreign key(department_id) references department(id)
 );
+
 INSERT INTO employees (emp_id, name, salary, phone_number, status, job_title, department_id)
 VALUES
 (1, 'Alice Johnson', 60000.00, '123-456-7890', 'Active', 'HR', 1),
@@ -24,14 +25,15 @@ create table departments(
 );
 
 -- Insert sample data into departments table
-INSERT INTO departments (id, department_name, department_head)
+select * from department;
+INSERT INTO department (id, dept_name)
 VALUES
-(1, 'HR', 'Alice'),
-(2, 'IT', 'Bob'),
-(3, 'QA', 'Diana'),
-(4, 'Sales', 'Eve'),
-(5, 'Finance', 'Frank'),
-(6, 'Support', 'Grace');
+(1, 'HR'),
+(2, 'IT'),
+(3, 'QA'),
+(4, 'Sales'),
+(5, 'Finance'),
+(6, 'Support');
 
 alter table employees modify emp_id int auto_increment;
 desc departments;
@@ -99,7 +101,7 @@ select *, count(job_title) from employees group by job_title; -- error
 -- it is used to filter records based on aggregate functions.
 -- unlike where clause filters records based on rows before grouping, having filters group of data after aggregation.
 -- it is used with group by clause to filter records
--- ex : get sum of salary id > 100000
+-- ex : get sum of salary > 100000
 select job_title, sum(salary) from employees group by job_title having sum(salary) > 100000;
 select * from employees having salary > 80000;
 -- cannot used without group by unless an aggregate function is present
@@ -107,6 +109,7 @@ select * from employees having salary > 80000;
  
 -- having with multiple conditions
 select job_title, sum(salary), avg(salary) from employees group by job_title having sum(salary) > 65000 and sum(salary) < 100000;
+select job_title, sum(salary), avg(salary) from employees group by job_title having sum(salary) between 65000 and 100000;
 
 -- 5.Limit clause 
 -- by using limit clause we can set how many rows returns in the query results
@@ -125,7 +128,7 @@ select * from employees order by salary limit 3;
 -- Y → Number of rows to skip.
 -- if we pass X and Y negative value it will throw error
 -- returns second largest salary 
-select * from employees order by salary desc limit 1,1;
+select * from employees order by salary desc limit 2,1;
 
 -- other clause - select , from , distinct, etc.
 
@@ -156,27 +159,43 @@ delete from employees where salary = ( select max_salary from (select max(salary
 
 -- another solution -
 delete from employees order by salary desc limit 1;
-
+select * from employees;
+select department_id, count(status) as active_emp from employees where status = 'Active' group by department_id having active_emp > 1;
 -- Get the number of active employees in each department. Show only departments that have more than 1 active employees.
 select department_id, count(status) as active_emp from employees where status = 'Active' group by department_id having active_emp > 1;
 
 -- Find the top 2 job titles with the highest total salary, considering only active employees.
+select job_title, sum(salary) from employees group by job_title order by sum(salary) desc limit 2;
 select job_title, sum(salary) as total from employees where status = 'Active' group by job_title order by total desc limit 2; 
 
 -- Return the department_id and total salary of employees for the single department that has the highest combined salary.
+select department_id, sum(salary) from employees group by department_id order by sum(salary) desc limit 1;
 select department_id, sum(salary) as total from employees group by department_id order by total desc limit 1;
 
 -- List all phone numbers that are used by more than one employee.
+select phone_number, count(phone_number) as cnt from employees group by phone_number having cnt > 1;
 select phone_number, count(phone_number) as used_count from employees group by phone_number having used_count > 1;
 
 -- Return all employees who are in departments where no one has the job title 'Manager'.
+select department_id, count(department_id) from employees where job_title != 'Manager' group by department_id;
 select department_id from employees group by department_id having sum(job_title = 'Manager') = 0;
-
+select * from employees;
 -- For each job title, show the name of the employee with the highest salary.
-select name,job_title, max(salary) as maxSal from employees group by name, job_title having maxSal;
+SELECT e.job_title, e.name, e.salary
+FROM employees e
+WHERE e.salary = (
+    SELECT MAX(salary)
+    FROM employees
+    WHERE job_title = e.job_title
+);
+
+select * from employees where salary = (select max(salary) from employees);
+select * from employees order by salary desc limit 3,1;
+
 
 -- 7. Job Titles with Average Salary Below 40000
 -- List job titles where the average salary is below 40,000.
+select job_title, avg(salary) as avgSalary from employees group by job_title having avgSalary < 70000;
 
 -- 8. Departments With No Employees
 -- Show all departments that do not have any employees assigned to them.
@@ -186,3 +205,4 @@ select name,job_title, max(salary) as maxSal from employees group by name, job_t
 
 -- 10. Latest 3 Employees Joined
 -- If you had a hire_date column (assume it's there), return the 3 most recently joined employees.
+select * from employees order by hire_date desc limit 3;

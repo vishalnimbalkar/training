@@ -37,7 +37,7 @@ const validate = function (req, res, next) {
 
 app.use((err, req, res, next) => {
   console.error(err.stack)
-  res.status(500).send('Error')
+  return res.status(500).send('Error')
 })
 
 
@@ -56,7 +56,7 @@ const addTime = function (req, res, next){
 // })
 app.use(print)// apply for all routes
 // app.use("/",print)// apply for all routes with "/"
-// app.use("/about",print)// apply for all routes "/demo" 
+// app.use("/about",print)// apply for all routes "/about" 
 app.use(addTime);
 app.use('/validate/:id', validate)
 
@@ -83,7 +83,7 @@ app.get('/validate/:id', (req, res)=>{
 // same as appllication level middleware, expects uses instance of express.Router()
 
 // 3.Error-handling middleware
-// it always take fout parameters (err, req, res, next)
+// it always take four parameters (err, req, res, next)
 
 // 4.Built-in middleware
 // - express.json()

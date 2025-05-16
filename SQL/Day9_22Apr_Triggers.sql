@@ -4,7 +4,7 @@ use triggersDB;
 -- Triggers 
 -- it is a store procedure in a database that automatically executes when event occurs.
 -- by using triggers we can automate tasks
--- trigger can executed when some record is inserted or updated in table.
+-- trigger can executed when some record is inserted or updated or delated in table.
 -- syntax - 
 delimiter $
 -- CREATE TRIGGER [trigger_name]
@@ -16,6 +16,16 @@ delimiter $
 --     trigger_body
 -- END$
 delimiter ;
+
+delimiter :
+create trigger my_trigger
+before insert 
+on account
+for each row
+begin
+	-- statements
+end :
+delimier ;
 
 -- - [before | after] : specifies trigger is fire before or after a event.
 -- - {insert | update | delete} : specifies the operation that active trigger.
@@ -157,7 +167,6 @@ select * from cust_delation_details;
 -- but we can in oracle and sql server
 -- mysql dose not guarantee order of execution of multiple triggers on same event
 -- every trigger is inside transaction automatically when some errors occurs it will rollback 
--- every trigger is inside transaction automatically when some errors occurs it will rollback 
 
 -- 1. Can a trigger modify the same table it is triggered on?
 -- Example: A BEFORE UPDATE trigger on customer tries to UPDATE the same customer table.
@@ -175,7 +184,7 @@ select * from customer;
 
 -- 2. Can you create a trigger that calls a stored procedure?
 -- Can a trigger CALL my_procedure() inside the BEGIN...END block?
--- ans : yes we can call store procedure inside begin...end, but if store procedure try to modify same table if gives error
+-- ans : yes we can call store procedure inside begin...end, but if store procedure try to modify same table it gives error
 
 -- 3. How does a trigger behave if an error occurs inside it?
 -- What happens to the main SQL operation if the trigger fails?

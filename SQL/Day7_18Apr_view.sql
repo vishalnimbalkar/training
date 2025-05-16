@@ -60,6 +60,14 @@ select * from Materialize_view;
 -- views are very helpful for secure data, by restricting access of important data to third party users.
 -- Views in mysql can be created by selecting some/all columns and rows of table by filtering data based on condition.
 --  just like normal tables, we can perform operations like create, update, drop, and delete on the views.
+
+create view emp_view as
+select * from employee;
+select * from emp_view;
+desc emp_view;
+
+delete from emp_view where id = 4;
+
 select * from employee;
 create view employee_details as
 select employee_id, first_name, last_name, job_id

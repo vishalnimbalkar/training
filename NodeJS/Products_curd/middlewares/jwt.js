@@ -19,7 +19,7 @@ const jwtAuthMiddleware = (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ error: "Invalid token" });
+    return res.status(500).json({ error: "Invalid token" });
   } 
 };
 
@@ -27,8 +27,10 @@ const jwtAuthMiddleware = (req, res, next) => {
  * function to generate jwt token
  */
 const generateToken = (userData) => {
-  //generate new jwt token using user data
-  return jwt.sign(userData, process.env.JWT_SECRET_KEY, { expiresIn: 1000 });
+  //generate new jwt access token and refress token using user data
+  const accessToken = jwt.sign(userData, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
+  const refreshToken = jwt.sign(userData, process.env.JWT_REFRESH_SECRET_KEY, { expiresIn: "7d" }); // longer-lived
+  return { accessToken, refreshToken };
 };
 
 module.exports = { jwtAuthMiddleware, generateToken };

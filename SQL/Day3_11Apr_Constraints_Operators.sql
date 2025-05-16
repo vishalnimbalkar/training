@@ -34,7 +34,7 @@ alter table persons modify age int null;
 
 -- UNIQUE on create table 
 create table persons(
-    id int not null,
+    id int not null auto_increment,
     name varchar(49) not null,
     email varchar(50),
     age int,

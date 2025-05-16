@@ -127,7 +127,9 @@ from users
 cross join bookings 
 on users.id = bookings.customer_id; 
 -- above query work same as inner join 
-
+desc products;
+alter table 
+-- id,email, name, password, created_at, modified_at
 -- 6.SELF JOIN 
 -- In this join table is joined with itself
 -- syntax - 
