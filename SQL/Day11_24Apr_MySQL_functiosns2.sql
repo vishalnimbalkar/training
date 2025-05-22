@@ -88,13 +88,13 @@ select pow(2,null); -- null
 -- seed - optional, if seed is specified it returns repeatable squance of random number.
 select rand(1);-- 0.40540353712197724
 select rand();
-select floor(rand()*10);
+select floor(rand()*10);-- 
 
 select ceil('24.5');-- 25
 select floor(24.5);-- 25
-select round(24.4);
+select round(24.2);
 
-
+-- Round()
 -- 7.GREATEST()
 -- function returns greatest value from a given list of arguments
 -- syntax - greatest(arg1,arg2,...argN);
@@ -122,6 +122,11 @@ select truncate(12.2222, 2);-- 12.22
 select truncate(12.2222, 6);-- 12.2222
 select format(12.2222, 6);-- 12.222200
 
+-- 10.FORMAT()
+-- function rounds specified number into a specified decimals.
+-- syntax - format(number, decimal_places);
+select format(1333332.233324, 10);-- 1,333,332.2333240000
+
 -- SUM() / AVG() / MAX() / MIN() / COUNT() – Aggregates. 
 
 #Date Functions
@@ -134,7 +139,7 @@ select now();
 -- 2.CURRENT_TIMESTAMP()
 -- function returns current date and time
 -- Note: The date and time is returned as "YYYY-MM-DD HH:MM:SS" (string) or as YYYYMMDDHHMMSS.uuuuuu (numeric).
--- syntax - NOW();
+-- syntax - CURRENT_TIMESTAMP();
 select current_timestamp();
 -- both now() and current_timestamp() works same 
 
@@ -160,7 +165,7 @@ select curtime();
 -- addUnit - required, the type of addUnit to add.
 			-- MICROSECOND SECOND MINUTE HOUR DAY WEEK MONTH QUARTER YEAR SECOND_MICROSECOND MINUTE_MICROSECOND MINUTE_SECOND 
 			-- HOUR_MICROSECOND HOUR_SECOND HOUR_MINUTE DAY_MICROSECOND DAY_SECOND DAY_MINUTE DAY_HOUR YEAR_MONTH
-select date_add('2025-04-24', interval 10 day);
+select date_add('2025-04-24', interval 10 day);;
 select date_add('2025-04-24', interval 10 year);
 select date_add('2025-04-24', interval 10 month);
 select date_add(now(), interval 10 month);
@@ -194,7 +199,7 @@ select date_sub(now(), interval -20 hour); -- add 20 hours
 select datediff('2025-04-24','2025-04-1'); -- 23
 select datediff('2025-04-24','2024-04-24 17:57:02');-- 365
 select datediff('2024-04-24','2025-04-24');-- -365
-select datediff('2025-04-25 20:57:02','2025-04-24 17:57:02');-- 1
+select datediff('2025-04-26','2025-04-25 17:57:02');-- 1
 
 DELIMITER //
 
@@ -285,7 +290,7 @@ select day(now()); -- 24
 		-- 5 - First day of week is Monday
 		-- 6 - First day of week is Sunday and the first week of the year has more than 3 days
 		-- 7 - First day of week is Monday
-select week(now());
+select week(now());-- 
 select week('2025-12-31'); -- 2
 
 -- 12.DAYNAME()

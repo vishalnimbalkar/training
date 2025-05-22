@@ -62,7 +62,7 @@ select random_number(10);
 -- “Hey, don’t cache this! Recalculate the result every time the function runs!”
 
 -- Example :- add two numbers
-delimiter 
+delimiter //
 create function add_numbers(number1 int, number2 int) returns int
 deterministic 
 begin 
@@ -154,42 +154,39 @@ select *, calculate_tax(salary) from employee;
 -- syntax - ASCII(character);
 -- if more than one character is passed then only the first character ascii value is return
 select ascii(name), desig from employee order by ascii(desig) desc;
+select ascii(name) from users;
 
 -- 2.CHAR_LENGTH() and CHARACTER_LENGTH() - both are equal
 -- returns length of characters from string
 select char_length('vishal  @&^%*^@%');
 
--- 2.CONCAT()
--- it adds two or more expressions together.alter
+-- 3.CONCAT()
+-- it adds two or more expressions together.
 -- syntax - concat(exp1,exp2...expN);
 -- if any of the expression is null returns null
 select concat('hello ','everyone');-- 
 select concat('hello', null); -- null-
 select concat(name," sir") from employee;
+select concat(name, email) from users;
 
--- 3.CONCAT_WS()
+-- 4.CONCAT_WS()
 -- this function adds two or more expressions together with separator
 -- syntax - concat_ws(separator, exp1,... expN);
 -- if separator is null function returns null, separator is required
 -- expression is also required if exp is null it will skipped.
 select id,concat_ws('-',name,desig) from employee;
-select group_concat(name order by name desc separator '-') from employee;
+select group_concat(name order by name desc separator '-') from users;
 
--- 4.FIELD()
+-- 5.FIELD()
 -- returns index position of a value in a list of values
 -- function perform case-insensitive search
 -- return 1 if value is present in list
 -- if value is not present in list or it is null function returns 0.
--- if value is not present in list or it is null function returns 0.
 -- syntax - field(value, val1,val2,... valN);
 -- value - required, it is value that search in a list
-select field('alice', name) from employee;
-select field('a', 'b','c',null) ;	
+select field('arjun', name) from users;
+select field('a', 'a','b','c',null) ;	-- 
 
--- 5.FORMAT()
--- function rounds specified number into a specified decimals.
--- syntax - format(number, decimal_places);
-select format(1333332.233324, 10);-- 1,333,332.2333240000
 
 -- 6.INSERT()
 -- The INSERT() function inserts a string within a string at the specified position and for a certain number of characters.
@@ -209,9 +206,9 @@ select insert('hello world', 7, 6,'vishal'); -- index is start with 1 not 0
 -- function returns the position of first occurence of string in another string
 -- case-insensitive
 -- syntax - instr(string1, string2);
-select instr(name, 'l') from employee;
+select instr(name, 'l') from users;
 
-select instr("vishal","z");
+select instr("vishal","i");
 -- if string is not present returns 0
 select instr(name, 'a') from employee;
 
@@ -233,7 +230,7 @@ select ucase(null); -- null
 -- function extracts number of characters from a string(starting from left)
 -- syntax - left(string, number_of_chars);
 -- if number_of_chars is greater than length of string then returns whole string
-select left(name, 2) from employee;
+select left(name, 2) from users;
 select left(name, 12) from employee;
 
 -- 10.RIGHT()
@@ -262,11 +259,13 @@ select length(saafjsk);-- error - unknown column
 -- if substring is not found, it returns 0
 -- case-insensitive search
 -- this function equal to POSITION() function
+-- POSITION(substring IN string)
 -- syntax - locate(substring, string, start);
 	-- substring - required, the substring to search in string
 	-- string - required, the string that we searched
 	-- start - optional, the starting position to start search, by default 1
 select locate('a','vishal');
+select position("a" in "vishal");
 select locate('is', 'what is your name?');
 select locate('is', 'what is your name?',8); 
 select position('is' in 'what is your name');
@@ -290,6 +289,7 @@ select substring("My name is vishal",4);
 select substring("My name is vishal",4,7);
 select substring("My name is vishal",4,null);
 select substring("My name is vishal",-4,2);
+select mid("vishal", 4);
 
 select mid("My name is vishal",4);
 select mid("My name is vishal",4,7);
@@ -310,6 +310,7 @@ select replace('My name is vishal', 'a','A'); -- My nAme is vishAl
 -- syntax - TRIM(string);
 select trim('   vishal  ');-- vishal
 select trim(null); -- null
+select trim(34   );
 
 -- 16.LTRIM() and RTRIM()
 -- LTRIM() remove leading spaces from string

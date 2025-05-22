@@ -24,7 +24,7 @@
 // - process directly
 
 // Features of Node.js
-// 1.Very fase: built on google chrome's v8 engine, it execute js code quickly
+// 1.Very fast: built on google chrome's v8 engine, it execute js code quickly
 // 2. It uses a single-threaded event loop to handle multiple connections efficiently
 // 3.cross platform: it can run on windows, linux, and Mac os
 // 4.Asynchronous: all apis are non-bloking
@@ -46,26 +46,26 @@
 const fs = require('fs');
 const crypto = require('crypto');
 
-// setTimeout(() => {
-//     console.log('settimeout 1 ');
-// }, 0);
+setTimeout(() => {
+    console.log('settimeout 1 ');
+}, 0);
 
-// console.log('hello from top level code');
+console.log('hello from top level code');
 
-// setImmediate(()=> console.log('hello from immediate 1'))
+setImmediate(()=> console.log('hello from immediate 1'))
 
-// fs.readFile('sample.txt' , ()=>{
-//     console.log('IO polling finish');
+fs.readFile('sample.txt' , ()=>{
+    console.log('IO polling finish');
     
-//     setTimeout(() => {
-//         console.log('settimeout 2 ');
-//     }, 0);
-//     setTimeout(() => {
-//         console.log('settimeout 3 ');
-//     }, 5*1000);
+    setTimeout(() => {
+        console.log('settimeout 2 ');
+    }, 0);
+    setTimeout(() => {
+        console.log('settimeout 3 ');
+    }, 5*1000);
     
-//     setImmediate(()=> console.log('hello from immediate 2'))
-// })
+    setImmediate(()=> console.log('hello from immediate 2'))
+})
 
 
 // process.env.UV_THREADPOOL_SIZE = 4;

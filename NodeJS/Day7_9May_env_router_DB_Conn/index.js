@@ -34,3 +34,10 @@ app.listen(port,  async() => {
 // why we use .env?
 // - keep sensitive data outoff source code
 // like database Credential, api keys, other secreat keys 
+
+// What is a Router?
+// A router in Express is a mini-application that handles a group of related routes.
+// Instead of putting all your routes in one big file (like app.js or server.js), you split them into separate files by feature, such as:
+// routes/products.js
+// routes/users.js
+// Then you connect them to the main app using app.use().

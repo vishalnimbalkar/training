@@ -90,7 +90,7 @@ drop procedure show_details;
 
 #store procedure vs function
 -- function returns exactly one value , procedure returns 0, 1 or more values using in/out/inout.
--- function supports in/out/inout , procedure supports only in by default.
+-- function supports only in by default  procedure supports in/out/inout.
 -- function used in select, where etc, procedure cannot directly used in select.
 -- use of DML in function not recommended, can use DML.
 -- function not allowed DDL, use of DDL possible using dynamic sql(prepare, execute).

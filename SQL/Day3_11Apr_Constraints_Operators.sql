@@ -211,8 +211,8 @@ alter table persons auto_increment = 100;
 insert into persons(name) values('vishal');
 insert into persons(name) values ('sanket');
 select * from persons;
-insert into persons values (400, 'abc'); -- set auto_increament = 400;
-insert into persons values (default, 'xyz'); -- id = 401
+insert into persons(id, name) values (300, 'abc'); -- set auto_increament = 400;
+insert into persons(id, name) values (default, 'xyz'); -- id = 401
 ----------------------------------------------------------------------------------
 -- #SQL operators
 use demo;

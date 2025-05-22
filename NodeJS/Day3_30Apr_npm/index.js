@@ -43,7 +43,7 @@ console.log('hello')
 // 5.scripts
 // "start" : "node index.js" - start app using nodejs. 'npm start' automatically runs this.
 
-// "dev" : "nodemon index.js" - starts the app with nodemon. 'npm run rev'
+// "dev" : "nodemon index.js" - starts the app with nodemon. 'npm run dev'
 
 // "test": "echo \"Error: no test specified\" && exit 1" - used for testing 
 

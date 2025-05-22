@@ -47,6 +47,7 @@ app.get('/getData', (req, res)=>{
 // localhost:3000/getData?name=vishal&name=rahul&name=sanket
 // if pass query with same name it will store as array 
 // ['vishal','rahul','sanket']
+
 app.get('/getSubjects', (req, res)=>{
     const data = req.query.subject;
     console.log(data);// java,c,dsa

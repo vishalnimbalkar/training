@@ -27,10 +27,9 @@ const jwtAuthMiddleware = (req, res, next) => {
  * function to generate jwt token
  */
 const generateToken = (userData) => {
-  //generate new jwt access token and refress token using user data
-  const accessToken = jwt.sign(userData, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
-  const refreshToken = jwt.sign(userData, process.env.JWT_REFRESH_SECRET_KEY, { expiresIn: "7d" }); // longer-lived
-  return { accessToken, refreshToken };
+  //generate new jwt access token using user data
+  const accessToken = jwt.sign(userData, process.env.JWT_SECRET_KEY, { expiresIn: "15m" });
+  return accessToken;
 };
 
 module.exports = { jwtAuthMiddleware, generateToken };

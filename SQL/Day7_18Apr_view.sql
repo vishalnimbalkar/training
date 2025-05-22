@@ -107,7 +107,15 @@ from employee e
 join departments d
 on e.department_id = d.department_id;
 
+use easy_movedb;
+create view user_bookings as 
+select u.name, u.email, b.fare, b.pickup_location, b.dropoff_location
+from bookings b
+left join users u
+on u.id = b.customer_id;
 
+select * from user_bookings;
+delete from user_bookings where name = "Bob Smith";
 update emp_dep set department_name = 'IT' where first_name = 'john';
 
 create or replace view agg_emp as

@@ -1,9 +1,36 @@
 const { pool } = require("../config/database");
 const { generateToken } = require("../middlewares/jwt.js");
-const jwt = require("jsonwebtoken");
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
-let refreshTokens = [];
+const register = async (req, res)=>{
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()})
+  }
+  const { name, email, password } = req.body;
+  
+  try {
+     // Hash the password using bcryptjs
+     const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const values = [name, email, hashedPassword];
+    const query = `insert into users (name, email, password) values (?,?,?)`;
+    const result = await pool.query(query, values);    
+    
+    //check how many rows are affected if not send error
+    if(result[0].affectedRows === 0){
+      return res.status(400).json({error : 'Error inserting records'})
+    }
+    return res.status(201).json({message : 'User register successfully'})
+    
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error tt'});
+  }
+
+}
+
 const login = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -11,10 +38,9 @@ const login = async (req, res) => {
   }
   const { email, password } = req.body;
   try {
-    const values = [email, password];
-    const query = `select id, email, name, password, created_At, modified_At from users where email = ? and password = ?`;
-    const [rows] = await pool.query(query,values);
-console.log(rows);
+    //get user by email
+    const query = `select id, email, name, password, created_At, modified_At from users where email = ?`;
+    const [rows] = await pool.query(query,email);
 
     //check if user data is fetched or not 
      if (rows.length === 0) {
@@ -22,50 +48,39 @@ console.log(rows);
     }
     const user = rows[0];
 
-    const { accessToken, refreshToken } = generateToken(user);
+    //compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    const accessToken = generateToken(user);
     //store refres token
-    refreshTokens.push(refreshToken);
-    return res.status(200).json({ message: "Login successfully", user, accessToken, refreshToken,});
+    return res.status(200).json({ message: "Login successfully", user, accessToken});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
 
-const refreshToken = (req, res) => {
-  const { refreshToken } = req.body;
-  // verify refreshToken from request is equal to refreshToken in refreshTokens
-  if (!refreshToken || !refreshTokens.includes(refreshToken)) {
-    return res.status(403).json({ error: "Refresh token is not valid" });
-  }
-
-  try {
-    // Verify refresh token
-    const decoded = jwt.verify(
-      refreshToken,
-      process.env.JWT_REFRESH_SECRET_KEY
-    );
-
-    // Remove existing exp and iat from payload
-    const { exp, iat, ...userData } = decoded;
-
-    // Create new access token
-    const accessToken = jwt.sign(userData, process.env.JWT_SECRET_KEY, {
-      expiresIn: "5m",
-    });
-
-    res.status(200).json({ accessToken });
-  } catch (err) {
-    console.error(err);
-    return res.status(403).json({ error: "Invalid refresh token" });
-  }
-};
-
 const logout = async (req, res) => {
-  const { refreshToken } = req.body;
-  //remove refresh token from refreshTokens when user logout
-  refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
   return res.status(200).json({ message: "Logged out successfully" });
 };
 
-module.exports = { login, refreshToken, logout };
+
+const getVehicles = async(req, res)=>{
+  try {
+    const id = Number(req.params.id);
+    const query = `select * from vehicles where driver_id = ?`;
+     const [result] = await pool.query(query, id);
+     if(!result){
+      return res.status(400).json({ message : "invalid request"});
+     }
+     return res.status(200).json({message : "success", result})
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message : "server error"})
+  }
+}
+
+module.exports = { login, register, logout, getVehicles };

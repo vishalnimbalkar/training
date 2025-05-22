@@ -1,7 +1,4 @@
 const { pool } = require("../config/database");
-const { generateToken } = require("../middlewares/jwt.js");
-const jwt = require('jsonwebtoken')
-
 /**
  * function to get all products
  */
@@ -46,16 +43,13 @@ const getProduct = async (req, res) => {
 const addProduct = async (req, res) => {
   try {
     //access data from request body and store in variable
-    const data = [
-      req.body.product_name,
-      req.body.product_qnt,
-      req.body.product_price,
-    ];
+    const {product_name, product_qnt, product_price} = req.body;
+    const data = [product_name, product_qnt, product_price];
     //Query to insert product
     const query = `insert into products (product_name, product_qnt, product_price) values (?,?,?)`;
     const result = await pool.query(query, data);
     // return response 200 ok when data added successfully
-    return res.status(200).json({ message: "Product added successfully" });
+    return res.status(201).json({ message: "Product added successfully" });
   } catch (error) {
     return res.status(500).json({ message: "Failed to add product" });
   }

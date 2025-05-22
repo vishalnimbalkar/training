@@ -151,7 +151,7 @@ app.get('/:name',param('name').customSanitizer(value => value.toUpperCase()), (r
 })
 
 // .default()
-// replace the value of the field if its either String, null, undefined, or NaN
+// replace the value of the field if its either empty String, null, undefined, or NaN
 
 app.post("/checkDefault", body("name").default("vishal"), (req, res) => {
   try {

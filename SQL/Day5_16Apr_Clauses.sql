@@ -9,7 +9,7 @@ create table employees(
     department_id int not null,
     foreign key(department_id) references department(id)
 );
-
+select * from files;
 INSERT INTO employees (emp_id, name, salary, phone_number, status, job_title, department_id)
 VALUES
 (1, 'Alice Johnson', 60000.00, '123-456-7890', 'Active', 'HR', 1),
@@ -18,7 +18,7 @@ VALUES
 (4, 'Diana Prince', 55000.00, '456-789-0123', 'Active', 'tester', 3),
 (5, 'Ethan Hunt', 70000.00, '567-890-1234', 'Active', 'Developer', 2);
 
-create table departments(
+create table departments(users
 	id int primary key unique not null,
     department_name varchar(10) not null,
     department_head varchar(10) not null
@@ -89,9 +89,11 @@ select * from employees order by salary, status;
     -- having condition 
     -- order by column_name asc/desc;
 -- get sum of salary by job_title 
+select * from employees;
 select job_title, sum(salary) from employees group by job_title;
 -- get sum of salary by department
 select department_id, sum(salary) from employees group by department_id;
+
 -- get count of each job title 
 select job_title, count(job_title) from employees group by job_title;
 
@@ -128,7 +130,7 @@ select * from employees order by salary limit 3;
 -- Y → Number of rows to skip.
 -- if we pass X and Y negative value it will throw error
 -- returns second largest salary 
-select * from employees order by salary desc limit 2,1;
+select * from employees order by salary desc limit 1;
 
 -- other clause - select , from , distinct, etc.
 
@@ -160,8 +162,9 @@ delete from employees where salary = ( select max_salary from (select max(salary
 -- another solution -
 delete from employees order by salary desc limit 1;
 select * from employees;
-select department_id, count(status) as active_emp from employees where status = 'Active' group by department_id having active_emp > 1;
+
 -- Get the number of active employees in each department. Show only departments that have more than 1 active employees.
+select department_id, count(department_id) as cnt from employees where status = 'Active' group by department_id having cnt > 1;
 select department_id, count(status) as active_emp from employees where status = 'Active' group by department_id having active_emp > 1;
 
 -- Find the top 2 job titles with the highest total salary, considering only active employees.
@@ -169,11 +172,9 @@ select job_title, sum(salary) from employees group by job_title order by sum(sal
 select job_title, sum(salary) as total from employees where status = 'Active' group by job_title order by total desc limit 2; 
 
 -- Return the department_id and total salary of employees for the single department that has the highest combined salary.
-select department_id, sum(salary) from employees group by department_id order by sum(salary) desc limit 1;
 select department_id, sum(salary) as total from employees group by department_id order by total desc limit 1;
 
 -- List all phone numbers that are used by more than one employee.
-select phone_number, count(phone_number) as cnt from employees group by phone_number having cnt > 1;
 select phone_number, count(phone_number) as used_count from employees group by phone_number having used_count > 1;
 
 -- Return all employees who are in departments where no one has the job title 'Manager'.
@@ -199,9 +200,13 @@ select job_title, avg(salary) as avgSalary from employees group by job_title hav
 
 -- 8. Departments With No Employees
 -- Show all departments that do not have any employees assigned to them.
+select d.id, count(e.department_id) as cnt from department d left join employees e on e.department_id = d.id group by d.id having cnt < 1;
+select * from employees;
 
 -- 9. Employees with Salary Above Department Average
 -- Get the list of employees whose salary is above the average salary of their department.
+select * from employees e1 where e1.salary > (select avg(e2.salary) from employees e2 where e1.department_id = e2.department_id);
+
 
 -- 10. Latest 3 Employees Joined
 -- If you had a hire_date column (assume it's there), return the 3 most recently joined employees.

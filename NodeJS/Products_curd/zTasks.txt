@@ -1,0 +1,10 @@
+22-05-2025
+// different ways of template (eg.,ejs)
+// difference between templates, which one is better 
+//how nodemailer behavious in case of not existing email
+// optimize template
+// send mail when user register successfully (add user name in email)
+// do not use __dirname use "../"
+// return res only in controller, throw from middleware and other 
+// when catch block executes 
+// remove files middleware add into file controller

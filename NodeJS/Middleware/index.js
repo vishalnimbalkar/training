@@ -84,6 +84,14 @@ app.get('/validate/:id', (req, res)=>{
 
 // 3.Error-handling middleware
 // it always take four parameters (err, req, res, next)
+// Express will automatically forward any errors (via throw or next(err)) to this handler.
+// always use error handling middleware after routes 
+// Request → Middleware 1 → Route Handler (throws error) → Express looks for: (err, req, res, next) → Error Middleware → Response
+// if we put it before it will never reach to error handling middleware 
+// We register error-handling middleware after routes because:
+// -Express handles middleware sequentially.
+// -Errors need to happen before they can be caught.
+// -Registering it later ensures it catches all errors thrown from routes or other middleware.
 
 // 4.Built-in middleware
 // - express.json()

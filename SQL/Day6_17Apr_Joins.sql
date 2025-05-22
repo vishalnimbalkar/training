@@ -1,6 +1,19 @@
+
+
+select c.name, b.* from bookings b
+left join users c 
+on c.id = b.customer_id;
+union
++, -, /, %, * 
+=, <= >= < >, != <>
+and or not
+npm install package@4.5.1
 show create table users;
+select * from users;
+select * from products;
 select * from bookings;
 select * from users;
+select * from vehicles;
 -- cascade in SQL
 -- cascade referes to a actions triggerd automatically when changes occurs in a parent table, automatically performs updation and delation in childs table, by using ON DELETE CASCADE AND ON UPDATE CASCADE   
 
@@ -43,6 +56,18 @@ select users.id, users.name, bookings.booking_status
 from users
 inner join bookings
 on users.id = bookings.customer_id;
+
+
+
+select b.id, b.customer_id, p.amount, p.payment_method 
+from payments p
+cross join bookings b
+on p.booking_id = b.id;
+
+select * from payments;
+select * from bookings;
+
+
 
 -- 2.LEFT JOIN 
 -- returns all records from left table(table1) and the matching records from the right table(table2)
@@ -127,9 +152,7 @@ from users
 cross join bookings 
 on users.id = bookings.customer_id; 
 -- above query work same as inner join 
-desc products;
-alter table 
--- id,email, name, password, created_at, modified_at
+
 -- 6.SELF JOIN 
 -- In this join table is joined with itself
 -- syntax - 
@@ -220,6 +243,28 @@ where booking_status = 'Completed'
 group by b.driver_id;
 
 -- 3.Find the average fare per driver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 select b.driver_id, avg(b.fare) 
 from bookings b 
 join users d 
