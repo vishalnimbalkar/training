@@ -1,10 +1,24 @@
-22-05-2025
-// different ways of template (eg.,ejs)
-// difference between templates, which one is better 
-//how nodemailer behavious in case of not existing email
-// optimize template
-// send mail when user register successfully (add user name in email)
-// do not use __dirname use "../"
-// return res only in controller, throw from middleware and other 
-// when catch block executes 
-// remove files middleware add into file controller
+22-05-2025(files, multer and email)
+// remove files middleware -- done
+// send response in following format: {success : true/false, message: msg/error} -- done
+// do not use __dirname use "../" -- done
+// how nodemailer behavious in case of not existing email -- done
+    - if email is syntactically correct then nodemailer send it to smtp server and then server is responsible for sending mail 
+    - server checks for email validity , if email is not existing then send bounce mail to senders mail 
+
+// optimize template -- done 
+// different ways of template -- done
+    1. html
+    2. ejs
+    3. nodemailer-express-handlebars
+
+// send mail when user register successfully (add user name in email)-- done 
+
+
+21-05-2025(multer)
+// can we config multer.diskStorage and serverStorage at one multer instance  - No, we have to create separate instance for each storage
+// second parameter for array is required or not - not required if we not provide no limit set on file uploads
+// pass limit value dynamically
+// if errors occurs in validation then previous files are uploaded or not - not uploaded
+// can we scan files using multer - no we can use third party scanners
+

@@ -1,5 +1,5 @@
 const express = require('express');
-const {login, logout, register, getVehicles, uploadsFile} = require('../controllers/users.js')
+const {login, logout, register} = require('../controllers/users.js')
 const {jwtAuthMiddleware} = require('../middlewares/jwt.js')
 const { body } = require('express-validator');
 const router = express.Router();
@@ -19,6 +19,6 @@ router.post("/login",
 
 router.post("/logout", logout);
 
-router.get('/getVehicles/:id',jwtAuthMiddleware, getVehicles)
+router.get('/getVehicles/:id',jwtAuthMiddleware)
 
 module.exports = router;

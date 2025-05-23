@@ -2,11 +2,12 @@ const { pool } = require("../config/database");
 const { generateToken } = require("../middlewares/jwt.js");
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const { sendEmail } = require('../services/email.js')
 
 const register = async (req, res)=>{
   const errors = validationResult(req);
   if(!errors.isEmpty()){
-    return res.status(400).json({errors: errors.array()})
+    return res.status(400).json({ success: false, errors: errors.array()})
   }
   const { name, email, password } = req.body;
   
@@ -19,22 +20,22 @@ const register = async (req, res)=>{
     const query = `insert into users (name, email, password) values (?,?,?)`;
     const result = await pool.query(query, values);    
     
-    //check how many rows are affected if not send error
+    // check how many rows are affected if not send error
     if(result[0].affectedRows === 0){
-      return res.status(400).json({error : 'Error inserting records'})
+      return res.status(400).json({ success: false, error : 'Error inserting records'})
     }
-    return res.status(201).json({message : 'User register successfully'})
+    await sendEmail(email, name);
+    return res.status(201).json({ success: true, message : 'User register successfully'})
     
   } catch (error) {
-    return res.status(500).json({ error: 'Internal server error tt'});
+    return res.status(500).json({success: false, error: error.message});
   }
-
 }
 
 const login = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ success: false, errors: errors.array() });
   }
   const { email, password } = req.body;
   try {
@@ -44,43 +45,27 @@ const login = async (req, res) => {
 
     //check if user data is fetched or not 
      if (rows.length === 0) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return res.status(401).json({ success: false, error: "Invalid email or password" });
     }
     const user = rows[0];
 
     //compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return res.status(401).json({success: false, error: "Invalid email or password" });
     }
 
     const accessToken = generateToken(user);
     //store refres token
-    return res.status(200).json({ message: "Login successfully", user, accessToken});
+    return res.status(200).json({success: true, message: "Login successfully", user, accessToken});
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({success: false, error: error.message });
   }
 };
 
 const logout = async (req, res) => {
-  return res.status(200).json({ message: "Logged out successfully" });
+  return res.status(200).json({success: true, message: "Logged out successfully" });
 };
 
-
-const getVehicles = async(req, res)=>{
-  try {
-    const id = Number(req.params.id);
-    const query = `select * from vehicles where driver_id = ?`;
-     const [result] = await pool.query(query, id);
-     if(!result){
-      return res.status(400).json({ message : "invalid request"});
-     }
-     return res.status(200).json({message : "success", result})
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message : "server error"})
-  }
-}
-
-module.exports = { login, register, logout, getVehicles };
+module.exports = { login, register, logout };

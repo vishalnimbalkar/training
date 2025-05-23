@@ -1,10 +1,20 @@
 const nodemailer = require('nodemailer');
-const fs = require('fs')
+const fs = require('fs');
+const ejs = require('ejs')
 const path = require('path')
-const logoPath = path.join(__dirname, '..', 'images', 'logo.png');
-const fbPath = path.join(__dirname, '..', 'images', 'fb.png');
-const xPath = path.join(__dirname, '..', 'images', 'x.png');
-const classPath = path.join(__dirname, '..', 'images', 'class.pdf');
+
+const setupHandlebars = async () => {
+  const hbsModule = await import('nodemailer-express-handlebars');
+  transporter.use('compile', hbsModule.default({
+    viewEngine: {
+      extname: '.hbs',
+      partialsDir: path.resolve('./templates/'),
+      defaultLayout: false,
+    },
+    viewPath: path.resolve('./templates/'),
+    extName: '.hbs',
+  }));
+};
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
@@ -16,41 +26,55 @@ const transporter = nodemailer.createTransport({
   },
 });
 
- const htmlTemplate = fs.readFileSync(path.join(__dirname, '..', 'templates', 'email-template.html'), 'utf-8');
- const sendEmail = async (to, subject, text) => {
-  let htmlContent = htmlTemplate.replace("{{text}}", text);
+//  const htmlTemplate = fs.readFileSync('./templates/email-template.html', 'utf-8');
+ 
+ const sendEmail = async (to, name) => {
+
+  //  let htmlContent = htmlTemplate.replace("{{name}}", name);
+
+  // const ejsTemplate = await ejs.renderFile('./templates/email-template.ejs', { name });
+
+  await setupHandlebars(); 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to,
-    subject,
-     html:htmlContent,
-   attachments: [
-    {
-      filename: 'logo.png',
-      path: logoPath,
-      cid: 'logo',
-      contentDisposition : 'inline'
-    },
-    {
-      filename: 'fb.png',
-      path: fbPath,
-      cid: 'fb',
-      contentDisposition : 'inline'
-    },
-    {
-      filename: 'x.png',
-      path: xPath,
-      cid: 'x',
-      contentDisposition : 'inline'
-    },
-    {
-      filename: 'class.pdf',
-      path: classPath,
-      cid: 'class',
-    }
-  ]
-  };
+    subject: 'Register successfully!',
 
+    // for html template 
+    // html:htmlContent,
+
+    // for ejs template
+    // html:ejsTemplate,
+
+    // for hbs template 
+    template: 'email-template',
+    context: { name },
+
+    attachments: [
+      {
+        filename: 'logo.png',
+        path: './images/logo.png',
+        cid: 'logo',
+        contentDisposition : 'inline'
+      },
+      {
+        filename: 'fb.png',
+        path: './images/fb.png',
+        cid: 'fb',
+        contentDisposition : 'inline'
+      },
+      {
+        filename: 'x.png',
+        path: './images/x.png',
+        cid: 'x',
+        contentDisposition : 'inline'
+      },
+      {
+        filename: 'class.pdf',
+        path: './images/class.pdf',
+        cid: 'class',
+      }
+    ]};
   return transporter.sendMail(mailOptions);
 };
 
