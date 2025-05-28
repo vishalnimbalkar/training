@@ -8,7 +8,7 @@ router.post('/add',addProduct)
 
 router.get('/:product_id', jwtAuthMiddleware, getProduct)
 router.patch('/:product_id', jwtAuthMiddleware, updateProduct)
-router.delete('/:product_id', jwtAuthMiddleware, deleteProduct)
+router.delete('/:product_id', deleteProduct)
 router.put('/:product_id', jwtAuthMiddleware, replaceProduct)
 
 module.exports = router;

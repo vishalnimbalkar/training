@@ -1,3 +1,8 @@
+28-05-2025(cors)
+// without auth which req 
+// use filter in req 
+// pretier- setup, purpose, building rules, user defiened rule, error handling
+
 22-05-2025(files, multer and email)
 // remove files middleware -- done
 // send response in following format: {success : true/false, message: msg/error} -- done
@@ -11,7 +16,6 @@
     1. html
     2. ejs
     3. nodemailer-express-handlebars
-
 // send mail when user register successfully (add user name in email)-- done 
 
 

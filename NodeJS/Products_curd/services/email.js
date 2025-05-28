@@ -3,18 +3,19 @@ const fs = require('fs');
 const ejs = require('ejs')
 const path = require('path')
 
-const setupHandlebars = async () => {
-  const hbsModule = await import('nodemailer-express-handlebars');
-  transporter.use('compile', hbsModule.default({
-    viewEngine: {
-      extname: '.hbs',
-      partialsDir: path.resolve('./templates/'),
-      defaultLayout: false,
-    },
-    viewPath: path.resolve('./templates/'),
-    extName: '.hbs',
-  }));
-};
+// const setupHandlebars = async () => {
+//   //handlebars does not support commonjs, we cannot use require 
+//   const hbsModule = await import('nodemailer-express-handlebars');
+//   transporter.use('compile', hbsModule.default({
+//     viewEngine: {
+//       extname: '.hbs',
+//       partialsDir: path.resolve('./templates/'),
+//       defaultLayout: false,
+//     },
+//     viewPath: path.resolve('./templates/'),
+//     extName: '.hbs',
+//   }));
+// };
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
@@ -28,28 +29,31 @@ const transporter = nodemailer.createTransport({
 
 //  const htmlTemplate = fs.readFileSync('./templates/email-template.html', 'utf-8');
  
- const sendEmail = async (to, name) => {
+ const sendEmail = async (to, name, verificationToken) => {
 
+   // await setupHandlebars(); 
   //  let htmlContent = htmlTemplate.replace("{{name}}", name);
 
-  // const ejsTemplate = await ejs.renderFile('./templates/email-template.ejs', { name });
+  const verificationUrl = `http://localhost:3000/user/verify?verification_token=${verificationToken}`
 
-  await setupHandlebars(); 
+  const ejsTemplate = await ejs.renderFile('./templates/email-template.ejs', { name, verificationUrl });
+
   const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject: 'Register successfully!',
+    from: process.env.EMAIL_USER, // senders email
+    to, // recipient email
+    subject: 'Account Created Successfully!',
 
     // for html template 
     // html:htmlContent,
 
     // for ejs template
-    // html:ejsTemplate,
+    html:ejsTemplate,
 
     // for hbs template 
-    template: 'email-template',
-    context: { name },
+    // template: 'email-template',
+    // context: { name },
 
+    // attachments for email
     attachments: [
       {
         filename: 'logo.png',

@@ -1,24 +1,15 @@
 const express = require('express');
-const {login, logout, register} = require('../controllers/users.js')
-const {jwtAuthMiddleware} = require('../middlewares/jwt.js')
-const { body } = require('express-validator');
+const {login, logout, register, verifyUser} = require('../controllers/users.js');
+const { registerValidator, loginValidator } = require('../validations/users.js');
 const router = express.Router();
 
 
-router.post("/register", [
-    body('name').notEmpty().withMessage('Name is required').bail(),
-    body('email').isEmail().withMessage('Email is invalid').bail(),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
-    ], register);
+router.post("/register",registerValidator, register);
 
-router.post("/login", 
-    [
-    body('email').isEmail().withMessage('Email is invalid').bail(),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
-    ], login);
+router.post("/login",loginValidator, login);
 
 router.post("/logout", logout);
 
-router.get('/getVehicles/:id',jwtAuthMiddleware)
+router.get('/verify',verifyUser)
 
 module.exports = router;

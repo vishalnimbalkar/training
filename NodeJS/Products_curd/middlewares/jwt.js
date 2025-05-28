@@ -32,4 +32,10 @@ const generateToken = (userData) => {
   return accessToken;
 };
 
-module.exports = { jwtAuthMiddleware, generateToken };
+// function to generate jwt token for email verificaation
+const verifyEmailToken = (userData) => {
+  const verificationToken = jwt.sign(userData, process.env.JWT_VERIFY_KEY);
+  return verificationToken;
+}
+
+module.exports = { jwtAuthMiddleware, generateToken, verifyEmailToken };

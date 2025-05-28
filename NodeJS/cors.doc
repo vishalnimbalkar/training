@@ -1,0 +1,38 @@
+
+// app.use(cors()); //enable all cors requests
+
+// app.use("/product", cors(),productRoutes); // cors for single route
+
+// Configuration Options 
+// 1.origin - controls which domain is allowed to access api.
+// origin: true - allows all origins 
+// origin: "http:exmaple.com" - allow only specified domain   
+// origin: ['http://example1.com', 'http://example2.com'] - // Allow multiple origins
+
+// 2.methods - specified which http mehtods are allowed
+// methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+// Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+// if simple methods not included in mehtods then It will allowed(eg, GET)
+
+// 3.allowedHeaders - Defines which header client is allowed to send
+// allowedHeaders: ['Content-Type', 'Authorization']
+
+// 4.exposedHeaders - Defines headers the broweser is allowed to read from the response
+// exposedHeaders: ['Content-Range', 'X-Custom-Header']
+// Access-Control-Expose-Headers: Content-Range, X-Custom-Header
+
+// 5.credentials - Indicates whether or not the response can be exposed when credentials are present (like cookies or HTTP auth headers).
+// Access-Control-Allow-Credentials: true
+//  If credentials: true, then origin cannot be '*'. You must specify a valid origin.
+
+// 6.maxAge - How long (in seconds) the results of a preflight request can be cached.
+// Access-Control-Max-Age: 600 sec
+
+// 7.preflightContinue
+// By default false
+// If it is false it end the process and send 204 response 
+// If it is true request is pass down to the next middleware or router handler, then we can send custom response or status code like 200
+
+// 8.optionsSuccessStatus
+It can set status code for preflight response when preflightContinue is false.
+optionsSuccessStatus: 200;
