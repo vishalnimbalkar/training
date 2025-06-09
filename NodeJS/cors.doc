@@ -36,3 +36,13 @@
 // 8.optionsSuccessStatus
 It can set status code for preflight response when preflightContinue is false.
 optionsSuccessStatus: 200;
+
+Q.What is a Preflight Request?
+A preflight request is an automatic OPTIONS request sent by the browser before the actual request, to ask the server if the real request is safe to send.
+
+GET requests usually don’t trigger a preflight because they are considered "simple" unless you make them complex by adding:
+
+Custom headers (e.g., Authorization)
+
+Content type other than application/x-www-form-urlencoded, multipart/form-data, or text/plain
+

@@ -1,3 +1,21 @@
+3-6-2025
+// paggination
+// filters
+// counts
+// all values should be dynamically apply 
+any other way to use camel case rule 
+return error with msg not in built errors 
+json schema vs express-validator
+
+30-05-2025
+can we show errors in prettier - No errors, only formatting issues using command, "check-format": "prettier --check .",
+check every options for rules in prettierrc file
+which files we can add in ignore file 
+crlf and lf
+
+29-05-2025
+the topic "Linting" and cover everything about it—what it is, how it works, setup, tools, and its benefits.
+
 28-05-2025(cors)
 // without auth which req 
 // use filter in req 
@@ -24,5 +42,5 @@
 // second parameter for array is required or not - not required if we not provide no limit set on file uploads
 // pass limit value dynamically
 // if errors occurs in validation then previous files are uploaded or not - not uploaded
-// can we scan files using multer - no we can use third party scanners
+// can we scan files using multer - no we can use third paryty scanners
 
